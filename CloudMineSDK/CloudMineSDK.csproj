@@ -55,11 +55,11 @@
     <Compile Include="Services\CMPushNotificationService.cs" />
     <Compile Include="Services\CMUserService.cs" />
     <Compile Include="Services\IAccessListService.cs" />
-    <Compile Include="Services\IApplicationService.cs" />
     <Compile Include="Services\IPushNotificationService.cs" />
     <Compile Include="Services\IRestWrapper.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\PCLRestWrapper.cs" />
+    <Compile Include="Services\IAppObjectService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
