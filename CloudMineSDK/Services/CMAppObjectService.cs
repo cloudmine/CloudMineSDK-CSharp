@@ -198,41 +198,35 @@ namespace CloudMineSDK.Services
 		}
 		#endregion
 
-//		#region Search
-//		// Search =============
-//		public void SearchObjects(string query, Action<CMObjectSearchResponse> responseAction, CMRequestOptions opts = null)
-//		{
-//			if (opts == null) opts = new CMRequestOptions();
-//			opts.Query["q"] = query;
-//
-//			APIService.Request(this.Application, "search", HttpMethod.Get, null, new CMRequestOptions(opts), (req, resp) =>
-//			{
-//				responseAction(new CMObjectSearchResponse(resp));
-//			});
-//		}
-//
-//		/// <summary>
-//		/// Performs a search query based on the string query and ensures the type of the query results
-//		/// are of the generic type parameter.
-//		/// </summary>
-//		/// <typeparam name="T">Becomes the __class__ parameter of the query. Uses Type name as the value</typeparam>
-//		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
-//		/// <param name="user"></param>
-//		/// <param name="responseAction"></param>
-//		/// <param name="opts"></param>
-//		public void SearchObjects<T>(string query, Action<CMObjectSearchResponse<T>> responseAction, CMRequestOptions opts = null) where T : CMObject
-//		{
-//			if (opts == null) opts = new CMRequestOptions();
-//			opts.Query["q"] = query;
-//			// add __class__ of type T name to the query passed in
-//
-//			APIService.Request(this.Application, "search", HttpMethod.Get, null, new CMRequestOptions(opts), (req, resp) =>
-//			{
-//				responseAction(new CMObjectSearchResponse<T>(resp));
-//			});
-//		}
-//		#endregion
-//
+		#region Search
+		// Search =============
+		public Task<CMObjectSearchResponse> SearchObjects(string query, CMRequestOptions opts = null)
+		{
+			if (opts == null) opts = new CMRequestOptions();
+			opts.Query["q"] = query;
+
+			return APIService.Request<CMObjectSearchResponse>(this.Application, "search", HttpMethod.Get, null, new CMRequestOptions(opts));
+		}
+
+		/// <summary>
+		/// Performs a search query based on the string query and ensures the type of the query results
+		/// are of the generic type parameter.
+		/// </summary>
+		/// <typeparam name="T">Becomes the __class__ parameter of the query. Uses Type name as the value</typeparam>
+		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
+		/// <param name="user"></param>
+		/// <param name="responseAction"></param>
+		/// <param name="opts"></param>
+		public Task<CMObjectSearchResponse<T>> SearchObjects<T>(string query, CMRequestOptions opts = null) where T : CMObject
+		{
+			if (opts == null) opts = new CMRequestOptions();
+			opts.Query["q"] = query;
+			// add __class__ of type T name to the query passed in
+
+			return APIService.Request<CMObjectSearchResponse<T>>(this.Application, "search", HttpMethod.Get, null, new CMRequestOptions(opts));
+		}
+		#endregion
+
 //		#region File
 //		// Upload file =========
 //		/// <summary>
