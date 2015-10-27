@@ -9,14 +9,16 @@ namespace CloudMineSDK.Scripts.Services
 {
 	public interface IUserService
 	{
+		Task<CMResponse> DeleteUser(CMUser user);
 		Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts);
+
+		// Theses are the not yet implemented interface methods. Haven't decided the proper return shape yet
 		void CurrentUserProfile();
 		void UpdateUserProfile();
-		void DeleteAllUserObjects(CMUser user, CMRequestOptions opts);
-		void DeleteUser(CMUser user);
 		void ListUsers();
 		void SearchUsers();
 
+		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts);
 		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts);
 		Task<CMObjectResponse> DeleteUserObject<T>(T data, CMUser user, CMRequestOptions opts) where T : CMObject;
 		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts);

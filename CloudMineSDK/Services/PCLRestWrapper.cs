@@ -10,9 +10,9 @@ namespace CloudmineSDK.Services
 {
     public class PCLRestWrapper : IRestWrapper
     {
-		public async Task<CMResponse> Request(CMApplication app, string action, HttpMethod method, Stream content, CMRequestOptions options)
+		public Task<CMResponse> Request(CMApplication app, string action, HttpMethod method, Stream content, CMRequestOptions options)
         {
-			await Request<CMResponse>(app, action, method, content, options);
+			return Request<CMResponse>(app, action, method, content, options);
         }
 
 		public async Task<T> Request<T>(CMApplication app, string action, HttpMethod method, Stream content, CMRequestOptions options) where T: CMResponse, new()

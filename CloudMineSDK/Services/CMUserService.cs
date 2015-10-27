@@ -87,8 +87,8 @@ namespace CloudmineSDK.Services
 				options = new CMRequestOptions(null, user);
 			
 			var loginTask = APIService.Request<CMLogoutResponse>(this.Application, "account/logout", HttpMethod.Post, null, options);
-			return loginTask;
 
+			// TODO: Stuff in the await which invalidates the session on the user param obj
 			//loginTask.ContinueWith(result => {
 			//	if (result.IsCompleted)
 			//	{
