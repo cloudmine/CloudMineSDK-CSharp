@@ -110,7 +110,7 @@ namespace CloudmineSDK.Model
         public int LimitResults
         {
             get { return this.limit; }
-            set { this.limit = Math.Max(1, value); }
+            set { this.limit = value; }
         }
 
         public Dictionary<string, string> Query
