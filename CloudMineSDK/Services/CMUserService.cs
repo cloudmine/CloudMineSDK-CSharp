@@ -1,16 +1,16 @@
-﻿using CloudmineSDK.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using CloudmineSDK.Model;
 using CloudMineSDK.Scripts.Model.Responses;
 using CloudMineSDK.Scripts.Services;
 using NetSDKPrivate.Scripts.Model.Responses;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Net.Http;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace CloudmineSDK.Services
 {

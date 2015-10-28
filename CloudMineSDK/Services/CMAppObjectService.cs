@@ -1,13 +1,13 @@
-﻿using CloudmineSDK.Model;
-using CloudmineSDK.Services;
-using CloudMineSDK.Scripts.Model.Responses;
-using CloudMineSDK.Scripts.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CloudmineSDK.Model;
+using CloudMineSDK.Scripts.Model.Responses;
+using CloudMineSDK.Scripts.Services;
+using CloudmineSDK.Services;
 
 namespace CloudMineSDK.Services
 {
@@ -227,56 +227,47 @@ namespace CloudMineSDK.Services
 		}
 		#endregion
 
-//		#region File
-//		// Upload file =========
-//		/// <summary>
-//		/// Portable class libraries won't work with file path as a parameter so data must be
-//		/// streamed through the upload method. 
-//		/// </summary>
-//		/// <param name="id"></param>
-//		/// <param name="data"></param>
-//		/// <param name="opts"></param>
-//		/// <returns></returns>
-//		public void Upload(string key, Stream data, Action<CMResponse> responseAction, CMRequestOptions opts = null)
-//		{
-//			APIService.Request(this.Application, "binary/" + key, HttpMethod.Put, data, new CMRequestOptions(opts), (req, resp) =>
-//			{
-//				responseAction(new CMResponse(resp));
-//			});
-//		}
-//
-//		// Download file ========
-//		public void Download(string key, Action<CMFileResponse> responseAction, CMRequestOptions opts = null)
-//		{
-//			APIService.Request<CMFileResponse>(this.Application, "binary/" + key, HttpMethod.Get, null, new CMRequestOptions(opts), (req, resp) =>
-//			{
-//				responseAction(resp);
-//			});
-//		}
-//		#endregion
-//
-//		#region Snippet
-//		// Code snippet =========
-//		public void Run(String snippet, Action<CMResponse> responseAction, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null)
-//		{
-//			if (opts == null) opts = new CMRequestOptions();
-//			foreach (string id in parameters.Keys)
-//			{
-//				opts.Query[id] = parameters[id];
-//			}
-//			foreach (string id in opts.SnippetParams.Keys)
-//			{
-//				opts.Query[id] = opts.SnippetParams[id];
-//			}
-//
-//			opts.Snippet = null;
-//			opts.SnippetParams.Clear();
-//
-//			APIService.Request(Application, "run/" + snippet, method, null, opts, (req, resp) =>
-//			{
-//				responseAction(new CMResponse(resp));
-//			});
-//		}
-//		#endregion
+		#region File
+		// Upload file =========
+		/// <summary>
+		/// Portable class libraries won't work with file path as a parameter so data must be
+		/// streamed through the upload method. 
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="data"></param>
+		/// <param name="opts"></param>
+		/// <returns></returns>
+		public Task<CMFileResponse> Upload(string key, Stream data, CMRequestOptions opts = null)
+		{
+			return APIService.Request<CMFileResponse>(this.Application, "binary/" + key, HttpMethod.Put, data, new CMRequestOptions(opts));
+		}
+
+		// Download file ========
+		public Task<CMFileResponse> Download(string key, CMRequestOptions opts = null)
+		{
+			return APIService.Request<CMFileResponse>(this.Application, "binary/" + key, HttpMethod.Get, null, new CMRequestOptions(opts));
+		}
+		#endregion
+
+		#region Snippet
+		// Code snippet =========
+		public Task<CMResponse> Run(String snippet, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null)
+		{
+			if (opts == null) opts = new CMRequestOptions();
+			foreach (string id in parameters.Keys)
+			{
+				opts.Query[id] = parameters[id];
+			}
+			foreach (string id in opts.SnippetParams.Keys)
+			{
+				opts.Query[id] = opts.SnippetParams[id];
+			}
+
+			opts.Snippet = null;
+			opts.SnippetParams.Clear();
+
+			return APIService.Request(Application, "run/" + snippet, method, null, opts);
+		}
+		#endregion
 	}
 }

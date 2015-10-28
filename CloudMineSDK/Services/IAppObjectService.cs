@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Net.Http;
-using CloudMineSDK.Scripts.Model.Responses;
-using CloudmineSDK.Model;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
+using CloudmineSDK.Model;
+using CloudMineSDK.Scripts.Model.Responses;
 
 namespace CloudMineSDK.Scripts.Services
 {
@@ -16,15 +16,13 @@ namespace CloudMineSDK.Scripts.Services
 		Task<CMObjectResponse> DeleteObjects(string[] keys, CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteObjects<T>(List<T> data, CMRequestOptions opts = null) where T : CMObject;
 
-		void Download(string key, CMRequestOptions opts = null);
-
 		Task<CMObjectFetchResponse> GetObject(string key = null, CMRequestOptions opts = null);
 		Task<CMObjectFetchResponse<T>> GetObject<T>(string key = null, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectFetchResponse> GetObjects(List<string> keys, CMRequestOptions opts = null);
 		Task<CMObjectFetchResponse> GetObjects(string[] keys, CMRequestOptions opts = null);
 		Task<CMObjectFetchResponse<T>> GetObjects<T>(string[] keys, CMRequestOptions opts = null) where T : CMObject;
 
-		void Run(string snippet, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null);
+		Task<CMResponse> Run(string snippet, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null);
 
 		Task<CMObjectSearchResponse> SearchObjects(string query, CMRequestOptions opts = null);
 		Task<CMObjectSearchResponse<T>> SearchObjects<T>(string query, CMRequestOptions opts = null) where T : CMObject;
@@ -37,6 +35,7 @@ namespace CloudMineSDK.Scripts.Services
 		Task<CMObjectResponse> UpdateObject(string key, object value, CMRequestOptions opts = null);
 		Task<CMObjectResponse> UpdateObject<T>(T data, CMRequestOptions opts = null) where T : CMObject;
 
-		void Upload(string key, Stream data, CMRequestOptions opts = null);
+		Task<CMFileResponse> Download(string key, CMRequestOptions opts = null);
+		Task<CMFileResponse> Upload(string key, Stream data, CMRequestOptions opts = null);
 	}
 }
