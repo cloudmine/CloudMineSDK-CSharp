@@ -1,10 +1,10 @@
 ﻿using CloudmineSDK.Model;
 using CloudmineSDK.Services;
-using CloudMineSDK.Scripts.Model;
+using CloudMineSDK.Model;
 using System.Threading.Tasks;
 using System.Net.Http;
 
-namespace CloudMineSDK.Scripts.Services
+namespace CloudMineSDK.Services
 {
 	/// <summary>
 	/// New access lists can be constructed by making a PUT or POST request to the access list endpoint.

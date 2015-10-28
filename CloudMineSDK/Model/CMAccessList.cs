@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CloudMineSDK.Scripts.Model
+namespace CloudMineSDK.Model
 {
 	/// <summary>
 	/// Each access list belongs to a single user and may only be accessed by that user.

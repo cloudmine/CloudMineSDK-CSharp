@@ -1,6 +1,6 @@
 ﻿using CloudmineSDK.Model;
 using CloudmineSDK.Services;
-using CloudMineSDK.Scripts.Model.PushNotifications;
+using CloudMineSDK.Model.PushNotifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace CloudMineSDK.Scripts.Services
+namespace CloudMineSDK.Services
 {
 	public class CMPushNotificationService : IPushNotificationService
 	{

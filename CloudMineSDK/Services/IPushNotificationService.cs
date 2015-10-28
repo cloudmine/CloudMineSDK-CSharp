@@ -1,8 +1,8 @@
-﻿using CloudMineSDK.Scripts.Model.PushNotifications;
+﻿using CloudMineSDK.Model.PushNotifications;
 using System.Threading.Tasks;
 using CloudmineSDK.Model;
 
-namespace CloudMineSDK.Scripts.Services
+namespace CloudMineSDK.Services
 {
 	public interface IPushNotificationService
 	{

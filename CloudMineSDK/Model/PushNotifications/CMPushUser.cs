@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CloudMineSDK.Scripts.Model.PushNotifications
+namespace CloudMineSDK.Model.PushNotifications
 {
 	/// <summary>
 	/// This class represents the user object needed for sending push notifications to

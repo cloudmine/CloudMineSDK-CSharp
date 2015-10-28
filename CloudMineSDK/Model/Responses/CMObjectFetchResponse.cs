@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace CloudMineSDK.Scripts.Model.Responses
+namespace CloudMineSDK.Model.Responses
 {
     public class CMObjectFetchResponse<T> : CMJSONResponse where T : CMObject
     {

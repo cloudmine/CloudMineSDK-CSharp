@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CloudMineSDK.Scripts.Model.PushNotifications
+namespace CloudMineSDK.Model.PushNotifications
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CMPushNotificationChannel

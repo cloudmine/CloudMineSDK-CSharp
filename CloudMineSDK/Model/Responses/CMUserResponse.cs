@@ -1,5 +1,5 @@
 ﻿using CloudmineSDK.Model;
-using CloudMineSDK.Scripts.Model.Responses;
+using CloudMineSDK.Model.Responses;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 
-namespace NetSDKPrivate.Scripts.Model.Responses
+namespace NetSDKPrivate.Model.Responses
 {
     public class CMUserResponse : CMJSONResponse
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace CloudMineSDK.Scripts.Model.Responses
+namespace CloudMineSDK.Model.Responses
 {
 	/// <summary>
 	/// Logout calls don't have a body in the response object so doing the

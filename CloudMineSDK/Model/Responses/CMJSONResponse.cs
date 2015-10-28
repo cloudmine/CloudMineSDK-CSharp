@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace CloudMineSDK.Scripts.Model.Responses
+namespace CloudMineSDK.Model.Responses
 {
     public class CMJSONResponse : CMResponse
     {

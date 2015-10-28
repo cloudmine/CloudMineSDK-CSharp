@@ -5,8 +5,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CloudmineSDK.Model;
-using CloudMineSDK.Scripts.Model.Responses;
-using CloudMineSDK.Scripts.Services;
+using CloudMineSDK.Model.Responses;
+using CloudMineSDK.Services;
 using CloudmineSDK.Services;
 
 namespace CloudMineSDK.Services

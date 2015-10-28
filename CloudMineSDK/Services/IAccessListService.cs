@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CloudmineSDK.Model;
-using CloudMineSDK.Scripts.Model;
+using CloudMineSDK.Model;
 
-namespace CloudMineSDK.Scripts.Services
+namespace CloudMineSDK.Services
 {
 	public interface IAccessListService
 	{

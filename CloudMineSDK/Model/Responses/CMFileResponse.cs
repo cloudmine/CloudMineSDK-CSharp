@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace CloudMineSDK.Scripts.Model.Responses
+namespace CloudMineSDK.Model.Responses
 {
     /// <summary>
     /// CMResponse derivative which stores the data stream for 

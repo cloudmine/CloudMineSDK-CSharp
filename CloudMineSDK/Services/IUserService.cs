@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NetSDKPrivate.Scripts.Model.Responses;
-using CloudMineSDK.Scripts.Model.Responses;
+using NetSDKPrivate.Model.Responses;
+using CloudMineSDK.Model.Responses;
 
-namespace CloudMineSDK.Scripts.Services
+namespace CloudMineSDK.Services
 {
 	public interface IUserService
 	{

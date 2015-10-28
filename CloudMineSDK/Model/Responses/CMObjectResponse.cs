@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace CloudMineSDK.Scripts.Model.Responses
+namespace CloudMineSDK.Model.Responses
 {
     public class CMObjectResponse : CMJSONResponse
     {

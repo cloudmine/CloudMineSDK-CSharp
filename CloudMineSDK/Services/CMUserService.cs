@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CloudmineSDK.Model;
-using CloudMineSDK.Scripts.Model.Responses;
-using CloudMineSDK.Scripts.Services;
-using NetSDKPrivate.Scripts.Model.Responses;
+using CloudMineSDK.Model.Responses;
+using CloudMineSDK.Services;
+using NetSDKPrivate.Model.Responses;
 using Newtonsoft.Json;
 
 namespace CloudmineSDK.Services
