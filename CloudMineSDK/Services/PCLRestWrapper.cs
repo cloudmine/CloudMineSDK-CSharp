@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CloudmineSDK.Model;
 
-namespace CloudmineSDK.Services
+namespace CloudMineSDK.Services
 {
     public class PCLRestWrapper : IRestWrapper
     {

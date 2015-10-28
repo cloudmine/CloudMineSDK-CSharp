@@ -7,7 +7,7 @@ using CloudmineSDK.Services;
 namespace CloudMineSDKiOSTests
 {
 	[TestFixture]
-	public class TestsSample
+	public class CMApplicationObjectTests
 	{
 		private const string appID = "";
 		private const string apiKey = "";
