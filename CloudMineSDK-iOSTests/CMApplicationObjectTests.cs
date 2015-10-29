@@ -11,40 +11,39 @@ namespace CloudMineSDKiOSTests
 	{
 		private const string appID = "";
 		private const string apiKey = "";
-
+		IAppObjectService appObjSrvc { get; set; }
 		
 		[SetUp]
 		public void Setup ()
 		{
 			CMApplication app = new CMApplication (appID, apiKey);
 			IRestWrapper api = new PCLRestWrapper ();
-			IAppObjectService appObjSrvc = new CMAppObjectService (app, api);
+			appObjSrvc = new CMAppObjectService (app, api);
 		}
 
 		[Test]
-		public void Pass ()
+		public void SetObjectFromDataObject ()
 		{
-			Console.WriteLine ("test1");
-			Assert.True (true);
+			HCPMock hcp = new HCPMock () {
+				ProviderName = "CloudMine Data Hospital",
+				ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107",
+				ProviderEmployeeCount = 25
+			};
+
+			var result = appObjSrvc.SetObject<HCPMock> (hcp);
+			Assert.True (false);
 		}
 
 		[Test]
-		public void Fail ()
-		{
-			Assert.False (true);
-		}
-
-		[Test]
-		[Ignore ("another time")]
-		public void Ignore ()
+		public void SetObjectFromKeyAndDataObject ()
 		{
 			Assert.True (false);
 		}
 
 		[Test]
-		public void Inconclusive ()
+		public void SetObjectFromCMObject ()
 		{
-			Assert.Inconclusive ("Inconclusive");
+			Assert.True (false);
 		}
 	}
 }

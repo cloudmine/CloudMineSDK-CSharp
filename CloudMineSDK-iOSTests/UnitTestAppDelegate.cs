@@ -34,8 +34,17 @@ namespace CloudMineSDKiOSTests
 			// register every tests included in the main application/assembly
 			runner.Add (System.Reflection.Assembly.GetExecutingAssembly ());
 
-			window.RootViewController = new UINavigationController (runner.GetViewController ());
-			
+			UINavigationController navController = new UINavigationController (runner.GetViewController ());
+
+			navController.NavigationBar.BarTintColor = UIColor.FromRGB(0/255.0f,145/255.0f,211/255.0f);
+			navController.NavigationBar.TintColor = UIColor.White;
+			navController.NavigationBar.TitleTextAttributes = new UIStringAttributes()
+			{
+				ForegroundColor = UIColor.White,
+			};
+
+			window.RootViewController = navController;
+
 			// make the window visible
 			window.MakeKeyAndVisible ();
 			

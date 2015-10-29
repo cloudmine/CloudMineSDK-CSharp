@@ -35,15 +35,19 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CMDeserializeObjectACLTests.cs" />
-    <Compile Include="CMDeserializerObjectResponseTests.cs" />
-    <Compile Include="CMDeSerializerUserResponseTests.cs" />
     <Compile Include="CMPushNotificationTests.cs" />
     <Compile Include="CMSerializeObjectACLTests.cs" />
     <Compile Include="Mocks\CMObjectMock.cs" />
     <Compile Include="Mocks\CMUserProfileMock.cs" />
+    <Compile Include="CMApplicationObjectTests.cs" />
+    <Compile Include="Responses\CMDeserializeObjectACLTests.cs" />
+    <Compile Include="Responses\CMDeserializerObjectResponseTests.cs" />
+    <Compile Include="Responses\CMDeSerializerUserResponseTests.cs" />
+    <Compile Include="Mocks\HCPMock.cs" />
+    <Compile Include="Mocks\PIIMock.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -57,5 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mocks\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 </Project>

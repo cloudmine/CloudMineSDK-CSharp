@@ -41,18 +41,21 @@ namespace CloudMineSDK.Services
 				}
 
 				httpClient.DefaultRequestHeaders.Add("X-CloudMine-ApiKey", app.APIKey);
-				httpClient.DefaultRequestHeaders.Add("Content-Type", opts.ContentType);
+				//httpClient.DefaultRequestHeaders.Add("Content-Type", opts.ContentType);
+				httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(opts.ContentType));
 
 				foreach (string headerKey in opts.Headers.Keys)
 				{
 					httpClient.DefaultRequestHeaders.Add(headerKey, opts.Headers[headerKey]);
 				}
 
-				StreamContent contentData = new StreamContent(opts.Data);
+				StreamContent contentData = content != null ? new StreamContent(content) : new StreamContent(opts.Data);
+				StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
 
 				if (method == HttpMethod.Post)
 				{
-					using (HttpResponseMessage responseMsg = await httpClient.PostAsync(uri, new StringContent(await contentData.ReadAsStringAsync(), System.Text.Encoding.UTF8, "application/json")))
+					HttpResponseMessage rsp = await httpClient.PostAsync (uri, stringContent);
+					using (HttpResponseMessage responseMsg = await httpClient.PostAsync(uri, stringContent))
 						return await GenerateCMResponseObject<T>(responseMsg);
 				}
 				else if (method == HttpMethod.Put)
@@ -82,21 +85,17 @@ namespace CloudMineSDK.Services
 			{
 				var cloudmineResponse = new T();
 
-				if (response == null)
-				{
-					cloudmineResponse.Initialize(response.StatusCode, null);
+				if (response == null) {
+					cloudmineResponse.Initialize (response.StatusCode, null);
+				} else if (response.Content == null || string.IsNullOrEmpty (response.Content.ToString ())) {
+					cloudmineResponse.Initialize (response.StatusCode, null);
+				} else {
+					Stream responseStream = await content.ReadAsStreamAsync();
+					//responseStream.CopyTo(cloudmineResponse.DataStream);
+
+					cloudmineResponse.Initialize (response.StatusCode, responseStream);
 				}
 
-				if (response.Content == null || string.IsNullOrEmpty(response.Content.ToString()))
-				{
-					cloudmineResponse.Initialize(response.StatusCode, null);
-				}
-
-				cloudmineResponse.Status = response.StatusCode;
-				cloudmineResponse.DataStream = new MemoryStream();
-
-				Stream responseStream = await content.ReadAsStreamAsync();
-				responseStream.CopyTo(cloudmineResponse.DataStream);
 				return cloudmineResponse;
 			}
 		}

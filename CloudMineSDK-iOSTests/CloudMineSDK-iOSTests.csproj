@@ -66,18 +66,36 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="MonoTouch.NUnitLite" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Mocks\" />
+    <Folder Include="Responses\" />
+    <Folder Include="AppRESTCalls\" />
+    <Folder Include="UserRESTCalls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="UnitTestAppDelegate.cs" />
     <Compile Include="CMApplicationObjectTests.cs" />
+    <Compile Include="Mocks\PIIMock.cs" />
+    <Compile Include="Mocks\HCPMock.cs" />
+    <Compile Include="CMBaselineTests.cs" />
+    <Compile Include="Mocks\CMObjectMock.cs" />
+    <Compile Include="Mocks\CMUserProfileMock.cs" />
+    <Compile Include="Responses\CMDeserializeObjectACLTests.cs" />
+    <Compile Include="Responses\CMDeserializerObjectResponseTests.cs" />
+    <Compile Include="Responses\CMDeSerializerUserResponseTests.cs" />
+    <Compile Include="CMTouchRunner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

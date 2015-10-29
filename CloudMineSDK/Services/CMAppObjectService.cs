@@ -8,6 +8,8 @@ using CloudmineSDK.Model;
 using CloudMineSDK.Model.Responses;
 using CloudMineSDK.Services;
 using CloudmineSDK.Services;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace CloudMineSDK.Services
 {
@@ -76,9 +78,9 @@ namespace CloudMineSDK.Services
 		/// <param name="user">the user for which the object will be created</param>
 		/// <param name="responseAction">delegate handler for the server response</param>
 		/// <param name="opts">request options</param>
-		public Task<CMObjectResponse> SetObject(object data, CMRequestOptions opts = null)
+		public async Task<CMObjectResponse> SetObject(object data, CMRequestOptions opts = null)
 		{
-			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
+			return await APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
 		}
 
 		/// <summary>
@@ -89,7 +91,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">the user for which this object will be created</param>
 		/// <param name="responseAction">delegate handler for the server repsonse</param>
 		/// <param name="opts">request options</param>
-		public Task<CMObjectResponse> SetObject(object value, CMRequestOptions opts = null, string key = null, string type = null)
+		public async Task<CMObjectResponse> SetObject(object value, CMRequestOptions opts = null, string key = null, string type = null)
 		{
 			Dictionary<string, object> data = new Dictionary<string, object>();
 
@@ -98,7 +100,7 @@ namespace CloudMineSDK.Services
 			if (!string.IsNullOrEmpty(type))
 				data[type] = type;
 
-			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
+			return await APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
 		}
 
 		/// <summary>
@@ -110,16 +112,18 @@ namespace CloudMineSDK.Services
 		/// <param name="user"></param>
 		/// <param name="responseAction"></param>
 		/// <param name="opts"></param>
-		public Task<CMObjectResponse> SetObject<T>(T data, CMRequestOptions opts = null) where T : CMObject
+		public async Task<CMObjectResponse> SetObject<T>(T data, CMRequestOptions opts = null) where T : CMObject
 		{
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			// only set the type if not already set and T is not CMobject
 			if (string.IsNullOrEmpty(data.Class) && typeof(T).Name != typeof(CMObject).Name)
 				data.Class = typeof(T).Name;
 
-			dataDict.Add(data.ID, data);
+			dataDict.Add (data.ID, data);
 
-			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
+			Stream stream = CMSerializer.ToStream (dataDict);
+
+			return await APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, stream, new CMRequestOptions(opts));
 		}
 		#endregion
 

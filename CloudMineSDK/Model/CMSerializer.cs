@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CloudmineSDK.Model
 {
@@ -27,12 +28,10 @@ namespace CloudmineSDK.Model
 
 		public static Stream ToStream(object o, Stream stream = null)
 		{
-			if (stream == null) stream = new MemoryStream();
-			using (JsonWriter writer = new JsonTextWriter(new StreamWriter(stream)))
-			{
-				JsonSerializer serilizer = new JsonSerializer();
-				serilizer.Serialize(writer, o);
-			};
+			var stringPayload = JsonConvert.SerializeObject(o);
+			// convert string to stream
+			byte[] byteArray = Encoding.UTF8.GetBytes(stringPayload);
+			stream = new MemoryStream(byteArray);
 
 			return stream;
 		}
@@ -40,8 +39,7 @@ namespace CloudmineSDK.Model
 		public static string ToString(object o, Stream stream = null)
 		{
 			if (stream == null) stream = new MemoryStream();
-
-			using (JsonWriter writer = new JsonTextWriter(new StreamWriter(stream)))
+			using (JsonTextWriter writer = new JsonTextWriter(new StreamWriter(stream)))
 			{
 				JsonSerializer serilizer = new JsonSerializer();
 				serilizer.Serialize(writer, o);

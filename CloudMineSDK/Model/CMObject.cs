@@ -59,7 +59,7 @@ namespace CloudmineSDK.Model
 
 		public CMObject()
 		{
-			ID = new Guid().ToString();//.Remove('-'); // default id construction
+			ID = Guid.NewGuid().ToString();//.Remove('-'); // default id construction
 			Class = this.GetType().Name; // default type construction
 
 			// Change tracking is enabled by default default
