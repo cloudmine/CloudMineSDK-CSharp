@@ -26,39 +26,41 @@ namespace CloudMineSDKiOSTests
 		}
 
 		[Test]
-		public void SetObjectFromDataObject ()
+		public void SetObjectFromKeyAndDataObjectWithKey ()
 		{
 			dynamic hcp = new ExpandoObject ();
 
-			hcp.__id__ = Guid.NewGuid().ToString();
+			hcp.__class__ = "HCPDynamic";
 			hcp.ProviderName = "CloudMine Data Hospital 2";
 			hcp.ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107";
 			hcp.ProviderEmployeeCount = 25;
 
-			Task<CMObjectResponse> objResponse = appObjSrvc.SetObject (hcp);
+			var id = Guid.NewGuid ().ToString ();
+			Task<CMObjectResponse> objResponse = appObjSrvc.SetObject (hcp, null, id);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);
 			Assert.That (objResponse.Result.HasErrors, Is.False);
-			Assert.That (objResponse.Result.Success.ContainsKey(hcp.ID), Is.True);
+			Assert.That (objResponse.Result.Success.ContainsKey(id), Is.True);
 		}
 
 		[Test]
-		public void SetObjectFromKeyAndDataObject ()
+		public void SetObjectFromKeyAndDataObjectWithID ()
 		{
 			dynamic hcp = new ExpandoObject ();
 
 			hcp.__id__ = Guid.NewGuid().ToString();
+			hcp.__class__ = "HCPDynamic";
 			hcp.ProviderName = "CloudMine Data Hospital 2";
 			hcp.ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107";
 			hcp.ProviderEmployeeCount = 25;
 
-			Task<CMObjectResponse> objResponse = appObjSrvc.SetObject (hcp, null, "12345");
+			Task<CMObjectResponse> objResponse = appObjSrvc.SetObject (hcp, null, hcp.__id__);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);
 			Assert.That (objResponse.Result.HasErrors, Is.False);
-			Assert.That (objResponse.Result.Success.ContainsKey(hcp.ID), Is.True);
+			Assert.That (objResponse.Result.Success.ContainsKey(hcp.__id__), Is.True);
 		}
 
 		[Test]

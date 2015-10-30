@@ -70,18 +70,6 @@ namespace CloudMineSDK.Services
 		#endregion
 
 		#region Set
-		// Set ==============
-		/// <summary>
-		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
-		/// </summary>
-		/// <param name="data">Data being uploaded to the server</param>
-		/// <param name="user">the user for which the object will be created</param>
-		/// <param name="responseAction">delegate handler for the server response</param>
-		/// <param name="opts">request options</param>
-		public async Task<CMObjectResponse> SetObject(object data, CMRequestOptions opts = null)
-		{
-			return await APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts));
-		}
 
 		/// <summary>
 		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
