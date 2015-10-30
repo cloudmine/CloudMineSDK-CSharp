@@ -1,0 +1,22 @@
+%YAML 1.2
+---
+name: CloudMine SDK
+id: cloudmine-sdk
+publisher: CloudMine
+license: License.md
+icons: 
+  - cloudmine-sdk_128x128.png
+  - cloudmine-sdk_512x512.png
+publisher-url: https://www.cloudmine.me/
+libraries: 
+  ios: ../lib/ios/Awesome.dll
+summary: CloudMine empowers organizations to deliver engaging mobile apps while eliminating architectural complexities. CloudMine brings together the core components for building enterprise mobile apps on the industry’s most secure backend platform. The CloudMine mBaaS Platform takes apps from test to web­scale deployment, instantly. 
+details: Details.md
+screenshots: 
+  - screenshots/screenshot1.png
+getting-started: GettingStarted.md
+version: 1.0.0
+samples: 
+  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
+  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
+...
