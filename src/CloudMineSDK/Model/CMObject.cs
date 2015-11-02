@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using CloudMineSDK;
 
 namespace CloudmineSDK.Model
 {
@@ -36,6 +37,12 @@ namespace CloudmineSDK.Model
 		/// </summary>
 		[JsonProperty("__access__", NullValueHandling=NullValueHandling.Ignore)]
 		public string[] AccessListIDs { get; set; }
+		/// <summary>
+		/// Gets or sets the location of an object. By default is not sent with the 
+		/// object to the server if the value is null.
+		/// </summary>
+		[JsonProperty("location", NullValueHandling=NullValueHandling.Ignore)]
+		public CMLocation Location { get; set; }
 
 		#region Property Change Tracking Members
 		// Flags the class to track or not track changes
