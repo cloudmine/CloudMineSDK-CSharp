@@ -16,8 +16,6 @@ namespace CloudMineSDKNUnitTests
 		[JsonProperty("ProviderEmployeeCount", NullValueHandling=NullValueHandling.Ignore)]
 		public int ProviderEmployeeCount { get; set; }
 
-		// TODO: Add in a GEO location for testing and also as an example
-
 		public HCPMock (): base()
 		{
 		}
