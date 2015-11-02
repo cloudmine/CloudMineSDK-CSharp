@@ -8,10 +8,10 @@ using CloudMineSDK.Model.Responses;
 using System.Net;
 using System.Dynamic;
 
-namespace CloudMineSDKiOSTests
+namespace CloudMineSDKNUnitTests
 {
 	[TestFixture]
-	public class CMApplicationObjectTests
+	public class CMAppObjSetTests
 	{
 		private const string appID = "de45fca60db7402ab15159655581e96c";
 		private const string apiKey = "856d34ac32344a0780a022a5bd3c22d6";

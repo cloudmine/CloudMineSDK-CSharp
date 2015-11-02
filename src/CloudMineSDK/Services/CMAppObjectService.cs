@@ -26,14 +26,14 @@ namespace CloudMineSDK.Services
 
 		#region Get
 		// Get ==============
-		public Task<CMObjectFetchResponse> GetObject(string key = null, CMRequestOptions opts = null)
-		{
-			if (opts == null) opts = new CMRequestOptions();
-			if (key != null) opts.Query["keys"] = key;
-
-			return APIService.Request<CMObjectFetchResponse>(this.Application, "text", HttpMethod.Get, null, opts);
-		}
-
+		/// <summary>
+		/// Gets an object of type CMObject by (key,__id__) and returns that Type
+		/// automatically parsed into the proper type in the Success field of the results.
+		/// </summary>
+		/// <returns>The object.</returns>
+		/// <param name="key">key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">a Type which derives from CMObject. Used to parse results</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetObject<T>(string key = null, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null) opts = new CMRequestOptions();
@@ -42,28 +42,29 @@ namespace CloudMineSDK.Services
 			return APIService.Request<CMObjectFetchResponse<T>>(this.Application, "text", HttpMethod.Get, null, opts);
 		}
 
-		public Task<CMObjectFetchResponse> GetObjects(List<string> keys, CMRequestOptions opts = null)
-		{
-			return GetObjects(keys.ToArray(), opts);
-		}
-
+		/// <summary>
+		/// Gets objects of type CMObject by (key,__id__) and returns that Type
+		/// </summary>
+		/// <returns>The objects in Success and Errors dictionaries.</returns>
+		/// <param name="keys">key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">a Type which derives from CMObject. Used to parse result</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetObjects<T>(List<string> keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			return GetObjects<T>(keys.ToArray(), opts);
 		}
 
-		public Task<CMObjectFetchResponse> GetObjects(string[] keys, CMRequestOptions opts = null)
-		{
-			if (opts == null) opts = new CMRequestOptions();
-			if (keys.Length > 0) opts.Headers["keys"] = String.Join(",", keys);
-
-			return APIService.Request<CMObjectFetchResponse>(this.Application, "text", HttpMethod.Get, null, opts);
-		}
-
+		// <summary>
+		/// Gets objects of type CMObject by (key,__id__) and returns that Type
+		/// </summary>
+		/// <returns>The objects in Success and Errors dictionaries.</returns>
+		/// <param name="keys">key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">a Type which derives from CMObject. Used to parse result</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetObjects<T>(string[] keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null) opts = new CMRequestOptions();
-			if (keys.Length > 0) opts.Headers["keys"] = String.Join(",", keys);
+			if (keys.Length > 0) opts.Query["keys"] = String.Join(",", keys);
 
 			return APIService.Request<CMObjectFetchResponse<T>>(this.Application, "text", HttpMethod.Get, null, opts);
 		}
@@ -74,11 +75,9 @@ namespace CloudMineSDK.Services
 		/// <summary>
 		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
 		/// </summary>
-		/// <param name="id">the id to classify the object under. defaults to the type of object value being passed in</param>
+		/// <param name="key">the id to classify the object under. defaults to the type of object value being passed in</param>
 		/// <param name="value">the cloudmine object being created</param>
-		/// <param name="user">the user for which this object will be created</param>
-		/// <param name="responseAction">delegate handler for the server repsonse</param>
-		/// <param name="opts">request options</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public async Task<CMObjectResponse> SetObject(object value, CMRequestOptions opts = null, string key = null, string type = null)
 		{
 			Dictionary<string, object> data = new Dictionary<string, object>();
@@ -96,10 +95,8 @@ namespace CloudMineSDK.Services
 		/// key (__id__, ID) already exists. 
 		/// </summary>
 		/// <typeparam name="T">Any object which derives from CMObject. CMObject auto declares and creates unique identifiers and the class type</typeparam>
-		/// <param name="data"></param>
-		/// <param name="user"></param>
-		/// <param name="responseAction"></param>
-		/// <param name="opts"></param>
+		/// <param name="data">CMObject to create.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public async Task<CMObjectResponse> SetObject<T>(T data, CMRequestOptions opts = null) where T : CMObject
 		{
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
@@ -117,22 +114,42 @@ namespace CloudMineSDK.Services
 
 		#region Update
 		// Update ===========
-		public Task<CMObjectResponse> UpdateObject(object data, CMRequestOptions opts = null)
-		{
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts));
-		}
-
+		/// <summary>
+		/// The values posted in this request are merged with existing values on the server.
+		/// If the key you are creating already exists, isn't a simple value (such as a string or number), 
+		/// and the new value you send for it also isn't a simple value, its contents will be merged with 
+		/// the data you send. Otherwise the contents will be replaced. If the key does not exist, the 
+		/// entry will be created.
+		/// </summary>
+		/// <returns>CMObjectResponse</returns>
+		/// <param name="key">Key value to be updated.</param>
+		/// <param name="value">Object value to be serialized.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectResponse> UpdateObject(string key, object value, CMRequestOptions opts = null)
 		{
 			Dictionary<string, object> data = new Dictionary<string, object>();
 			data[key] = value;
 
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts));
+			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts));
 		}
 
+		/// <summary>
+		/// The values posted in this request are merged with existing values on the server.
+		/// If the key you are creating already exists, isn't a simple value (such as a string or number), 
+		/// and the new value you send for it also isn't a simple value, its contents will be merged with 
+		/// the data you send. Otherwise the contents will be replaced. If the key does not exist, the 
+		/// entry will be created.
+		/// </summary>
+		/// <returns>The object.</returns>
+		/// <param name="data">CMObject value to be serialized.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">Objects must derive from the CMObject class which ensures proper configuration.</typeparam>
 		public Task<CMObjectResponse> UpdateObject<T>(T data, CMRequestOptions opts = null) where T : CMObject
 		{
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts));
+			Dictionary<string, T> dataDict = new Dictionary<string, T>();
+			dataDict[data.ID] = data;
+
+			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(opts));
 		}
 		#endregion
 
@@ -144,7 +161,7 @@ namespace CloudMineSDK.Services
 			{
 				if (opts == null) opts = new CMRequestOptions();
 					opts.Query["keys"] = key;
-				return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Delete, null, new CMRequestOptions(opts));
+				return APIService.Request<CMObjectResponse>(this.Application, "data", HttpMethod.Delete, null, new CMRequestOptions(opts));
 			} else {
 				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
 			}
@@ -157,19 +174,10 @@ namespace CloudMineSDK.Services
 				if (opts == null) opts = new CMRequestOptions();
 				opts.Query["keys"] = String.Join(",", keys);
 
-				return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Delete, null, new CMRequestOptions(opts));
+				return APIService.Request<CMObjectResponse>(this.Application, "data", HttpMethod.Delete, null, new CMRequestOptions(opts));
 			} else {
 				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
 			}
-		}
-
-		public Task<CMObjectResponse> DeleteObjects<T>(List<T> data, CMRequestOptions opts = null) where T : CMObject
-		{
-			if (data.Count > 0)
-				return DeleteObjects(data.Select(d => d.ID).ToArray(), opts);
-			else {
-				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
-			} 
 		}
 
 		public Task<CMObjectResponse> DeleteAllObjects(CMRequestOptions opts = null)
@@ -177,7 +185,7 @@ namespace CloudMineSDK.Services
 			if (opts == null) opts = new CMRequestOptions();
 			opts.Query["all"] = true.ToString();
 
-			return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Delete, null, new CMRequestOptions(opts));
+			return APIService.Request<CMObjectResponse>(this.Application, "data", HttpMethod.Delete, null, new CMRequestOptions(opts));
 		}
 		#endregion
 
@@ -216,7 +224,7 @@ namespace CloudMineSDK.Services
 		/// Portable class libraries won't work with file path as a parameter so data must be
 		/// streamed through the upload method. 
 		/// </summary>
-		/// <param name="id"></param>
+		/// <param name="key"></param>
 		/// <param name="data"></param>
 		/// <param name="opts"></param>
 		/// <returns></returns>
