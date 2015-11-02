@@ -155,6 +155,14 @@ namespace CloudMineSDK.Services
 
 		#region Delete
 		// Delete ============
+		/// <summary>
+		/// Deletes objects that match specified keys. If no keys are specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>CMObjectResponse</returns>
+		/// <param name="key">Individual key to the object being deleted</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectResponse> DeleteObject(string key, CMRequestOptions opts = null)
 		{
 			if (key != null)
@@ -167,6 +175,14 @@ namespace CloudMineSDK.Services
 			}
 		}
 
+		/// <summary>
+		/// Deletes objects that match specified keys. If no keys are specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>CMObjectResponse</returns>
+		/// <param name="keys">Keys to the objects being deleted</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectResponse> DeleteObjects(string[] keys, CMRequestOptions opts = null)
 		{
 			if (keys != null && keys.Length > 0)
@@ -180,6 +196,13 @@ namespace CloudMineSDK.Services
 			}
 		}
 
+		/// <summary>
+		/// Deletes objects that match specified keys. If no keys are specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>CMObjectResponse</returns>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectResponse> DeleteAllObjects(CMRequestOptions opts = null)
 		{
 			if (opts == null) opts = new CMRequestOptions();
@@ -191,23 +214,15 @@ namespace CloudMineSDK.Services
 
 		#region Search
 		// Search =============
-		public Task<CMObjectSearchResponse> SearchObjects(string query, CMRequestOptions opts = null)
-		{
-			if (opts == null) opts = new CMRequestOptions();
-			opts.Query["q"] = query;
-
-			return APIService.Request<CMObjectSearchResponse>(this.Application, "search", HttpMethod.Get, null, new CMRequestOptions(opts));
-		}
 
 		/// <summary>
-		/// Performs a search query based on the string query and ensures the type of the query results
-		/// are of the generic type parameter.
+		/// Objects can be fetched via a search query. For example, this allows you to fetch all objects where 
+		/// a field has a specific value. The full specification for the query language is specified below.
+		/// This query returns all objects where the key field is equal to the string "value".
 		/// </summary>
 		/// <typeparam name="T">Becomes the __class__ parameter of the query. Uses Type name as the value</typeparam>
 		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
-		/// <param name="user"></param>
-		/// <param name="responseAction"></param>
-		/// <param name="opts"></param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectSearchResponse<T>> SearchObjects<T>(string query, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null) opts = new CMRequestOptions();

@@ -18,7 +18,6 @@ namespace CloudMineSDK.Services
 		Task<CMObjectFetchResponse<T>> GetObjects<T>(List<string> keys, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectFetchResponse<T>> GetObjects<T>(string[] keys, CMRequestOptions opts = null) where T : CMObject;
 
-		Task<CMObjectSearchResponse> SearchObjects(string query, CMRequestOptions opts = null);
 		Task<CMObjectSearchResponse<T>> SearchObjects<T>(string query, CMRequestOptions opts = null) where T : CMObject;
 
 		Task<CMObjectResponse> SetObject(object value, CMRequestOptions opts = null, string key = null, string type = null);

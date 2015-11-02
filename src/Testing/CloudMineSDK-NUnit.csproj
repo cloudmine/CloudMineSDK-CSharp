@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0164CDB2-212B-4DDB-90E3-09AA2CFD06F2}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Testing</RootNamespace>
+    <RootNamespace>CloudMineSDKNUnit</RootNamespace>
     <AssemblyName>Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -51,6 +51,7 @@
     <Compile Include="CMAppObjGetTests.cs" />
     <Compile Include="CMAppObjSetTests.cs" />
     <Compile Include="CMAppObjUpdateTests.cs" />
+    <Compile Include="CMAppObjSearchTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
