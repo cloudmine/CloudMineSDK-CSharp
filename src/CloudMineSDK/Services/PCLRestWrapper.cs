@@ -49,18 +49,20 @@ namespace CloudMineSDK.Services
 					httpClient.DefaultRequestHeaders.Add(headerKey, opts.Headers[headerKey]);
 				}
 
-				StreamContent contentData = content != null ? new StreamContent(content) : new StreamContent(opts.Data);
-				StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
-
 				if (method == HttpMethod.Post)
 				{
-					HttpResponseMessage rsp = await httpClient.PostAsync (uri, stringContent);
+					StreamContent contentData = content != null ? new StreamContent(content) : new StreamContent(opts.Data);
+					StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
+
 					using (HttpResponseMessage responseMsg = await httpClient.PostAsync(uri, stringContent))
 						return await GenerateCMResponseObject<T>(responseMsg);
 				}
 				else if (method == HttpMethod.Put)
 				{
-					using (HttpResponseMessage responseMsg = await httpClient.PutAsync(uri, new StringContent(await contentData.ReadAsStringAsync(), System.Text.Encoding.UTF8, "application/json")))
+					StreamContent contentData = content != null ? new StreamContent(content) : new StreamContent(opts.Data);
+					StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
+
+					using (HttpResponseMessage responseMsg = await httpClient.PutAsync(uri, stringContent))
 						return await GenerateCMResponseObject<T>(responseMsg);
 				}
 				else if (method == HttpMethod.Get)

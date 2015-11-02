@@ -68,7 +68,7 @@ namespace CloudmineSDK.Model
             {
                 this.headers = this.headers.Concat(opts.headers).ToDictionary(e => e.Key, e => e.Value);
                 this.parameters = this.parameters.Concat(opts.parameters).ToDictionary(e => e.Key, e => e.Value);
-                this.query = this.query.Concat(opts.parameters).ToDictionary(e => e.Key, e => e.Value);
+				this.query = this.query.Concat(opts.query).ToDictionary(e => e.Key, e => e.Value);
                 this.count = opts.count;
 
                 if (opts.Data != null)

@@ -143,18 +143,9 @@ namespace CloudMineSDK.Services
 			if (key != null)
 			{
 				if (opts == null) opts = new CMRequestOptions();
-				opts.Query["keys"] = key;
+					opts.Query["keys"] = key;
 				return APIService.Request<CMObjectResponse>(this.Application, "text", HttpMethod.Delete, null, new CMRequestOptions(opts));
 			} else {
-				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
-			}
-		}
-
-		public Task<CMObjectResponse> DeleteObject<T>(T data, CMRequestOptions opts = null) where T : CMObject
-		{
-			if (!string.IsNullOrEmpty(data.ID))
-				return DeleteObject(data.ID, opts);
-			else {
 				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
 			}
 		}

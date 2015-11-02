@@ -12,7 +12,6 @@ namespace CloudMineSDK.Services
 	{
 		Task<CMObjectResponse> DeleteAllObjects(CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteObject(string key, CMRequestOptions opts = null);
-		Task<CMObjectResponse> DeleteObject<T>(T data, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectResponse> DeleteObjects(string[] keys, CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteObjects<T>(List<T> data, CMRequestOptions opts = null) where T : CMObject;
 
