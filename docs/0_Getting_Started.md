@@ -20,6 +20,8 @@ We're actively developing and invite you to fork and send pull requests on GitHu
 
 * [cloudmine/cloudmine-xamarin](https://github.com/cloudmine/cloudmine-xamarin)
 
+It is highly advised that you checkout the repository and explore some of the projects under the main solution. Integration tests have been written on supported platforms and give great insight into how the SDK was intended to be leveraged. 
+
 ###Xamarin/Nuget
 
 You can add the C# library as a Nuget package or from the Xamarin Component store.
