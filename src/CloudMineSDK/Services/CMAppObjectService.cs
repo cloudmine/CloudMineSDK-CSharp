@@ -239,18 +239,31 @@ namespace CloudMineSDK.Services
 		/// Portable class libraries won't work with file path as a parameter so data must be
 		/// streamed through the upload method. 
 		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="data"></param>
-		/// <param name="opts"></param>
+		/// <param name="key">Unique identifier for subsequent retrieval, update, and delete.</param>
+		/// <param name="data">Stream from a binary or other stream source which should be stored as a file.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		/// <returns></returns>
 		public Task<CMFileResponse> Upload(string key, Stream data, CMRequestOptions opts = null)
 		{
+			if (opts == null) {
+				opts = new CMRequestOptions ();
+				opts.ContentType = "application/octet-stream";
+			}
 			return APIService.Request<CMFileResponse>(this.Application, "binary/" + key, HttpMethod.Put, data, new CMRequestOptions(opts));
 		}
 
 		// Download file ========
+		/// <summary>
+		/// Download s specified file specified key and opts.
+		/// </summary>
+		/// <param name="key">Unique identifier for subsequent retrieval, update, and delete.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params</param>
 		public Task<CMFileResponse> Download(string key, CMRequestOptions opts = null)
 		{
+			if (opts == null) {
+				opts = new CMRequestOptions ();
+				opts.ContentType = "application/octet-stream";
+			}
 			return APIService.Request<CMFileResponse>(this.Application, "binary/" + key, HttpMethod.Get, null, new CMRequestOptions(opts));
 		}
 		#endregion
