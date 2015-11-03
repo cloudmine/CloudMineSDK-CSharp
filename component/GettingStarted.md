@@ -59,7 +59,7 @@ Beyond the links provided below, check out the Gihub repository for the SDK and 
 * CloudMine Dashboard:
 
 ### Contact
-* Sales:
-* Engineering support: 
+* Sales: sales@cloudmine.me
+* Engineering support: support@cloudmine.me
 * Tel: 
 * Twitter: @CloudMine @ry_donahue
