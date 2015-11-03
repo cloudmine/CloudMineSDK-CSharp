@@ -42,7 +42,7 @@ IPushNotificationService pushService = new CMPushNotificationService (app, api);
 IAccessListService aclService = new CMAccessListService (app, api);
 ```
 
-Intellisense and MonoDoc are enabled for documentation of individual services as well as examples further in this documentation.
+Intellisense and MonoDoc are enabled for documentation of individual service methods as well as examples linked further in this documentation.
 
 
 ## Additional Resources
@@ -51,6 +51,9 @@ Intellisense and MonoDoc are enabled for documentation of individual services as
 * Github:
 
 ### Documentation
+
+Beyond the links provided below, check out the Gihub repository for the SDK and looks at the NUnit integration tests. They provide many examples of how to leverage SDK and CloudMine features.
+
 * Tutorials:
 * Full API documentation:
 * CloudMine Dashboard:

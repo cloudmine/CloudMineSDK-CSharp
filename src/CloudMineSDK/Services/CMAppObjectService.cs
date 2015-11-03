@@ -242,7 +242,6 @@ namespace CloudMineSDK.Services
 		/// <param name="key">Unique identifier for subsequent retrieval, update, and delete.</param>
 		/// <param name="data">Stream from a binary or other stream source which should be stored as a file.</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
-		/// <returns></returns>
 		public Task<CMFileResponse> Upload(string key, Stream data, CMRequestOptions opts = null)
 		{
 			if (opts == null) {
@@ -270,7 +269,7 @@ namespace CloudMineSDK.Services
 
 		#region Snippet
 		// Code snippet =========
-		public Task<CMResponse> Run(String snippet, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null)
+		public Task<CMResponse> Run(String snippet, Dictionary<string, string> parameters = null, CMRequestOptions opts = null)
 		{
 			if (opts == null) opts = new CMRequestOptions();
 			foreach (string id in parameters.Keys)
@@ -285,7 +284,7 @@ namespace CloudMineSDK.Services
 			opts.Snippet = null;
 			opts.SnippetParams.Clear();
 
-			return APIService.Request(Application, "run/" + snippet, method, null, opts);
+			return APIService.Request(Application, "run/" + snippet, HttpMethod.Post, null, opts);
 		}
 		#endregion
 	}

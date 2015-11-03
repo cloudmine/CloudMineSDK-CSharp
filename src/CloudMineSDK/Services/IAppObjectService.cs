@@ -29,6 +29,6 @@ namespace CloudMineSDK.Services
 		Task<CMFileResponse> Download(string key, CMRequestOptions opts = null);
 		Task<CMFileResponse> Upload(string key, Stream data, CMRequestOptions opts = null);
 
-		Task<CMResponse> Run(string snippet, HttpMethod method, Dictionary<string, string> parameters = null, CMRequestOptions opts = null);
+		Task<CMResponse> Run(string snippet, Dictionary<string, string> parameters = null, CMRequestOptions opts = null);
 	}
 }

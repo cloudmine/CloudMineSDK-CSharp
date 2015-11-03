@@ -35,7 +35,6 @@
     <Compile Include="Model\CMApplication.cs" />
     <Compile Include="Model\CMCredentials.cs" />
     <Compile Include="Model\CMObject.cs" />
-    <Compile Include="Model\CMRequest.cs" />
     <Compile Include="Model\CMSerializer.cs" />
     <Compile Include="Model\CMUser.cs" />
     <Compile Include="Model\CMUserProfile.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Services\IAppObjectService.cs" />
     <Compile Include="Services\CMAppObjectService.cs" />
     <Compile Include="Model\CMLocation.cs" />
+    <Compile Include="Model\CMRequestOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
