@@ -48,18 +48,18 @@ Intellisense and MonoDoc are enabled for documentation of individual service met
 ## Additional Resources
 
 ### Source Code
-* Github:
+* [Github](https://github.com/cloudmine/cloudmine-xamarin)
 
 ### Documentation
 
 Beyond the links provided below, check out the Gihub repository for the SDK and looks at the NUnit integration tests. They provide many examples of how to leverage SDK and CloudMine features.
 
-* Tutorials:
-* Full API documentation:
-* CloudMine Dashboard:
+* [Tutorials](https://cloudmine.me/docs/#/code_examples)
+* [Full API documentation](https://cloudmine.me/docs)
+* [CloudMine Dashboard](https://cloudmine.me/dashboard)
 
 ### Contact
 * Sales: sales@cloudmine.me
 * Engineering support: support@cloudmine.me
-* Tel: 
+* Tel: 1-855-662-7722 ext 2
 * Twitter: @CloudMine @ry_donahue
