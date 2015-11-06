@@ -4,8 +4,8 @@ using CloudMineSDK.Services;
 using CloudmineSDK.Model;
 using CloudmineSDK.Services;
 using System.Collections.Generic;
-using NetSDKTests.Mocks;
 using Newtonsoft.Json;
+using CloudMineSDKNUnitTests.Mocks;
 
 namespace NetSDKTests
 {

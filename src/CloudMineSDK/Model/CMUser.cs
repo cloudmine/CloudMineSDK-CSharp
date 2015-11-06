@@ -72,6 +72,11 @@ namespace CloudmineSDK.Model
 			Profile = cmUserProfile;
 		}
 
+		public CMUser(string username, string email, string password)
+		{
+			SetCredentials(new CMCredentials(username, email, password));
+		}
+
 		public CMUser(string username, string email, string password, T cmUserProfile)
 		{
 			SetCredentials(new CMCredentials(username, email, password));

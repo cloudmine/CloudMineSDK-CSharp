@@ -6,8 +6,8 @@ using CloudmineSDK.Services;
 using System.IO;
 using System.Text;
 using CloudMineSDK.Model.Responses;
-using NetSDKTests.Mocks;
 using System.Net;
+using CloudMineSDKNUnitTests.Mocks;
 
 namespace NetSDKTests
 {

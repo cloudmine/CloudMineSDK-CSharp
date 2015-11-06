@@ -26,17 +26,38 @@ namespace CloudmineSDK.Services
 			APIService = apiService;
 		}
 
-		// should be able to call a snippet on any api call
-		public Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Create the specified user. User can also have a custom user profile
+		/// definition or a custom profile can be set at a later time with the update
+		/// user profile function. This function creates the user but doesn't log the
+		/// user in automatically. 
+		/// </summary>
+		/// <param name="user">Instance of the user to be created</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		public Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts = null)
 		{
-			// should merge and override passed in options so snippet can be run
-			CMRequestOptions request = new CMRequestOptions(opts, user);
+			if (opts == null)
+				opts = new CMRequestOptions(user);
+			else
+				opts = new CMRequestOptions(opts, user);
+			
 			string reqData = JsonConvert.SerializeObject(user);
 			byte[] byteArray = Encoding.UTF8.GetBytes(reqData);
 			MemoryStream stream = new MemoryStream(byteArray);
-			request.Data = stream;
+			opts.Data = stream;
 
-			return APIService.Request<CMUserResponse>(this.Application, "account/create", HttpMethod.Post, stream, request);
+			Task<CMUserResponse> createUser = APIService.Request<CMUserResponse>(this.Application, "account/create", HttpMethod.Post, stream, opts);
+
+			createUser.ContinueWith(result => {
+				if (result.IsCompleted)
+				{
+					// sets the user id of the user object passed in
+					if (!result.Result.HasErrors)
+						user.UserID = result.Result.CMUser.UserID;
+				}
+			});
+
+			return createUser;
 		}
 
 		public Task<CMResponse> DeleteUser(CMUser user)
@@ -52,8 +73,9 @@ namespace CloudmineSDK.Services
 		/// <summary>
 		/// Default login method. Uses the CMUserProfofile base object for profile de/serialization
 		/// </summary>
-		/// <param name="user"></param>
-		/// <param name="options"></param>
+		/// <param name="user">User to be logged in. Requires credentials on the user object which will override
+		/// credentials passed in on the options parameter if not null.</param>
+		/// <param name="options">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMUserResponse> Login(CMUser user, CMRequestOptions options = null)
 		{
 			if (options == null)
@@ -61,44 +83,73 @@ namespace CloudmineSDK.Services
 
 			options.Credentials = new CMCredentials(user.Credentials.Username, user.Credentials.Email, user.Credentials.Password);
 
-			Task<CMUserResponse> act = APIService.Request<CMUserResponse>(this.Application, "account/login", HttpMethod.Post, null, options);
-			return act;
+			var login = APIService.Request<CMUserResponse> (this.Application, "account/login", HttpMethod.Post, null, options);
+
+			login.ContinueWith(result => {
+					// sets the user id of the user object passed in
+					if (!result.Result.HasErrors) {
+						user.Session = result.Result.CMUser.Session;
+						user.SessionExpires = result.Result.CMUser.SessionExpires;
+					}
+				}, TaskContinuationOptions.OnlyOnRanToCompletion)
+				.Wait(); // ensures the continue with happens before user defined things
+
+			return login;
 		}
 
 		/// <summary>
 		/// Login method which allows the specification of the profile object type. T must derive from the CMUserProfile base object. 
 		/// </summary>
 		/// <typeparam name="T">Type of the CMUserProfile obect.</typeparam>
-		/// <param name="user">User object to be logged in.</param>
+		/// <param name="user">User object to be logged in. Requires credentials on the user object which will override
+		/// credentials passed in on the options parameter if not null.</param>
 		/// <param name="options">Any additional options like snippet execution parameters.</param>
-		public Task<CMUserResponse> Login<T>(CMUser<T> user, CMRequestOptions options = null) where T : CMUserProfile
+		public Task<CMUserResponse<T>> Login<T>(CMUser<T> user, CMRequestOptions options = null) where T : CMUserProfile
 		{
 			if (options == null)
 				options = new CMRequestOptions(user);
 
 			options.Credentials = new CMCredentials(user.Credentials.Username, user.Credentials.Email, user.Credentials.Password);
 
-			return APIService.Request<CMUserResponse>(this.Application, "account/login", HttpMethod.Post, null, options);
+			var login = APIService.Request<CMUserResponse<T>>(this.Application, "account/login", HttpMethod.Post, null, options);
+
+			login.ContinueWith(result => {
+					// sets the user id of the user object passed in
+					if (!result.Result.HasErrors) {
+						user.Session = result.Result.CMUser.Session;
+						user.SessionExpires = result.Result.CMUser.SessionExpires;
+					}
+				}, TaskContinuationOptions.OnlyOnRanToCompletion)
+				.Wait(); // ensures the continue with happens before user defined things
+
+			return login;
 		}
 
+		/// <summary>
+		/// Logoff the specified user and options. Leverages the credentials or session token
+		/// available on the user object to invalidate user login. Will also set the current
+		/// session token and sesssion expiration to empty on a successful request.
+		/// </summary>
+		/// <param name="user">User.</param>
+		/// <param name="options">Any additional options like snippet execution parameters.</param>
 		public Task<CMLogoutResponse> Logoff(CMUser user, CMRequestOptions options = null)
 		{
 			if (options == null)
 				options = new CMRequestOptions(null, user);
 			
-			var loginTask = APIService.Request<CMLogoutResponse>(this.Application, "account/logout", HttpMethod.Post, null, options);
+			var logout = APIService.Request<CMLogoutResponse>(this.Application, "account/logout", HttpMethod.Post, null, options);
 
 			// TODO: Stuff in the await which invalidates the session on the user param obj
-			//loginTask.ContinueWith(result => {
-			//	if (result.IsCompleted)
-			//	{
-			//		// erase the session token
-			//		user.Session = string.Empty;
-			//		user.SessionExpires = DateTime.MinValue;
-			//	}
-			//});
-			//
-			return loginTask;
+			logout.ContinueWith(result => {
+				if (result.IsCompleted)
+				{
+					// erase the session token
+					user.Session = string.Empty;
+					user.SessionExpires = DateTime.MinValue;
+				}
+			}).Wait(); // ensures the continue with happens before user defined things
+			
+			return logout;
 		}
 
 		/// <summary>

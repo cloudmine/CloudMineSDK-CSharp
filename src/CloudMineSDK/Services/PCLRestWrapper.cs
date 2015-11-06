@@ -51,11 +51,17 @@ namespace CloudMineSDK.Services
 
 				if (method == HttpMethod.Post)
 				{
-					StreamContent contentData = content != null ? new StreamContent(content) : new StreamContent(opts.Data);
-					StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
+					// Login requests post no body
+					if (content != null || opts.Data != null) {
+						StreamContent contentData = content != null ? new StreamContent (content) : new StreamContent (opts.Data);
+						StringContent stringContent = new StringContent (await contentData.ReadAsStringAsync (), System.Text.Encoding.UTF8, "application/json");
 
-					using (HttpResponseMessage responseMsg = await httpClient.PostAsync(uri, stringContent))
-						return await GenerateCMResponseObject<T>(responseMsg);
+						using (HttpResponseMessage responseMsg = await httpClient.PostAsync (uri, stringContent))
+							return await GenerateCMResponseObject<T> (responseMsg);
+					} else {
+						using (HttpResponseMessage responseMsg = await httpClient.PostAsync (uri, new StringContent (string.Empty)))
+							return await GenerateCMResponseObject<T> (responseMsg);
+					}
 				}
 				else if (method == HttpMethod.Put)
 				{

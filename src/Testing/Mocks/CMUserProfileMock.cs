@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NetSDKTests.Mocks
+namespace CloudMineSDKNUnitTests.Mocks
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CMUserProfileMock : CMUserProfile

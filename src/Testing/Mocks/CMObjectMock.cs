@@ -1,7 +1,7 @@
 ﻿using CloudmineSDK.Model;
 using Newtonsoft.Json;
 
-namespace NetSDKTests.Mocks
+namespace CloudMineSDKNUnitTests.Mocks
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CMOBjectMock: CMObject
