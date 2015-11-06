@@ -53,6 +53,8 @@
     <Compile Include="CMAppObjUpdateTests.cs" />
     <Compile Include="CMAppObjSearchTests.cs" />
     <Compile Include="CMUserAuthTests.cs" />
+    <Compile Include="CMUserObjSetTests.cs" />
+    <Compile Include="CMUserObjUpdateTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,8 +1,7 @@
 using System;
-using NUnit.Framework;
-using CloudMineSDK.Services;
 using CloudmineSDK.Model;
-using CloudmineSDK.Services;
+using CloudMineSDK.Services;
+using NUnit.Framework;
 
 namespace NetSDKTests
 {

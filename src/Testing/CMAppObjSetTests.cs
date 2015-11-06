@@ -1,12 +1,11 @@
 ﻿using System;
-using NUnit.Framework;
-using CloudmineSDK.Model;
-using CloudMineSDK.Services;
-using CloudmineSDK.Services;
-using System.Threading.Tasks;
-using CloudMineSDK.Model.Responses;
-using System.Net;
 using System.Dynamic;
+using System.Net;
+using System.Threading.Tasks;
+using CloudmineSDK.Model;
+using CloudMineSDK.Model.Responses;
+using CloudMineSDK.Services;
+using NUnit.Framework;
 
 namespace CloudMineSDKNUnitTests
 {

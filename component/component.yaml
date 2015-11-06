@@ -18,5 +18,6 @@ getting-started: GettingStarted.md
 version: 1.0.0
 samples: 
   iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
-  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
+  Android Sample: ../samples/AwesomeSample/AwesomeSample.sln
+  Windows Phone Sample: ../samples/AwesomeSample/AwesomeSample.sln
 ...

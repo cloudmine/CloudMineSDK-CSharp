@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using CloudmineSDK.Model;
 using CloudMineSDK.Model.Responses;
 using CloudMineSDK.Services;
-using CloudmineSDK.Services;
 using Newtonsoft.Json;
 using System.Text;
 

@@ -9,6 +9,7 @@ using CloudMineSDK.Model.Responses;
 
 namespace Testing
 {
+	[TestFixture()]
 	public class CMAppObjUpdateTests
 	{
 		private const string appID = "de45fca60db7402ab15159655581e96c";

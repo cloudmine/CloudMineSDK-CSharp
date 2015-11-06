@@ -1,13 +1,12 @@
 ﻿using System;
-using NUnit.Framework;
-using CloudMineSDK.Services;
-using CloudmineSDK.Model;
-using CloudmineSDK.Services;
 using System.IO;
-using System.Text;
-using CloudMineSDK.Model.Responses;
 using System.Net;
+using System.Text;
+using CloudmineSDK.Model;
+using CloudMineSDK.Model.Responses;
+using CloudMineSDK.Services;
 using CloudMineSDKNUnitTests.Mocks;
+using NUnit.Framework;
 
 namespace NetSDKTests
 {

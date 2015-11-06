@@ -1,5 +1,5 @@
 ﻿using CloudmineSDK.Model;
-using CloudmineSDK.Services;
+using CloudMineSDK.Services;
 using CloudMineSDK.Model;
 using System.Threading.Tasks;
 using System.Net.Http;

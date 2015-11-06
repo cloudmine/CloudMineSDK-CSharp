@@ -12,7 +12,7 @@ using CloudMineSDK.Services;
 using NetSDKPrivate.Model.Responses;
 using Newtonsoft.Json;
 
-namespace CloudmineSDK.Services
+namespace CloudMineSDK.Services
 {
 	public class CMUserService : IUserService
 	{
@@ -153,7 +153,8 @@ namespace CloudmineSDK.Services
 		}
 
 		/// <summary>
-		/// Allows for setting a new password for a provided user.
+		/// You may submit requests to change user passwords through the API. 
+		/// Use this method instead of password reset if the user knows their current password and simply wishes to change it. 
 		/// </summary>
 		/// <param name="user">Original user with current credentials prior to change</param>
 		/// <param name="newPassword"></param>
@@ -168,6 +169,14 @@ namespace CloudmineSDK.Services
 			return APIService.Request(this.Application, "account/password/change", HttpMethod.Post, CMSerializer.ToStream(data), opts);
 		}
 
+		/// <summary>
+		/// You can use this endpoint to reset user passwords. Use this if the user has 
+		/// forgotten their password and needs to securely reset it. This requires two API 
+		/// requests: one to request a password reset for the user (which sends them a 
+		/// password reset email), and another to fulfill that request and submit the new password.
+		/// </summary>
+		/// <returns>The password request.</returns>
+		/// <param name="email">Email.</param>
 		public Task<CMResponse> ResetPasswordRequest(string email)
 		{
 			Dictionary<string, string> data = new Dictionary<string, string>();
@@ -176,6 +185,14 @@ namespace CloudmineSDK.Services
 			return APIService.Request(this.Application, "account/password/reset", HttpMethod.Post, CMSerializer.ToStream(data), null);
 		}
 
+		/// <summary>
+		/// Resets the password. This request is used to fulfill the password reset once a reset token has been created.
+		/// Custom password reset form can be created on the CloudMine dashboard to deep link the token to the app.
+		/// Otherwise a default email form is presented to the user.
+		/// </summary>
+		/// <returns>The password.</returns>
+		/// <param name="token">The token sent in the email which is used to set the new password.</param>
+		/// <param name="newPassword">New password.</param>
 		public Task<CMResponse> ResetPassword(string token, string newPassword)
 		{
 			Dictionary<string, string> data = new Dictionary<string, string>();
@@ -189,33 +206,25 @@ namespace CloudmineSDK.Services
 		#region Get
 
 		// Get ==============
-		public Task<CMObjectFetchResponse<CMObject>> GetUserObject(CMUser user, string key, CMRequestOptions opts)
+		public Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null) opts = new CMRequestOptions(user);
 			if (key != null) opts.Query["keys"] = key;
 
-			return APIService.Request<CMObjectFetchResponse<CMObject>>(this.Application, "user/text", HttpMethod.Get, null, opts);
-		}
-
-		public Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts) where T : CMObject
-		{
-			if (opts == null) opts = new CMRequestOptions(user);
-			if (key != null) opts.Query["keys"] = key; ;
-
 			return APIService.Request<CMObjectFetchResponse<T>>(this.Application, "user/text", HttpMethod.Get, null, opts);
 		}
 
-		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, List<string> keys, CMRequestOptions opts)
+		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, List<string> keys, CMRequestOptions opts = null)
 		{
 			return GetUserObjects<CMObject>(user, keys.ToArray(), opts);
 		}
 
-		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, List<string> keys, CMRequestOptions opts) where T : CMObject
+		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, List<string> keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			return GetUserObjects<T>(user, keys.ToArray(), opts);
 		}
 
-		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, string[] keys, CMRequestOptions opts)
+		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, string[] keys, CMRequestOptions opts = null)
 		{
 			if (keys.Length > 0)
 			{
@@ -226,7 +235,7 @@ namespace CloudmineSDK.Services
 			return APIService.Request<CMObjectFetchResponse<CMObject>>(this.Application, "user/text", HttpMethod.Get, null, opts);
 		}
 
-		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, string[] keys, CMRequestOptions opts) where T : CMObject
+		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, string[] keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (keys.Length > 0)
 			{
@@ -241,49 +250,15 @@ namespace CloudmineSDK.Services
 		#endregion Get
 
 		#region Set
-
-		// Set ==============
-		/// <summary>
-		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
-		/// </summary>
-		/// <param name="data">Data being uploaded to the server</param>
-		/// <param name="user">the user for which the object will be created</param>
-		/// <param name="opts">request options</param>
-		public Task<CMObjectResponse> SetUserObject(object data, CMUser user, CMRequestOptions opts)
-		{
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts, user));
-		}
-
-		/// <summary>
-		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
-		/// </summary>
-		/// <param name="id">the id to classify the object under. defaults to the type of object value being passed in</param>
-		/// <param name="value">the cloudmine object being created</param>
-		/// <param name="user">the user for which this object will be created</param>
-		/// <param name="responseAction">delegate handler for the server repsonse</param>
-		/// <param name="opts">request options</param>
-		public Task<CMObjectResponse> SetUserObject(object value, CMUser user, CMRequestOptions opts = null, string key = null, string type = null)
-		{
-			Dictionary<string, object> data = new Dictionary<string, object>();
-
-			if (!string.IsNullOrEmpty(key))
-				data[key] = value;
-			if (!string.IsNullOrEmpty(type))
-				data[type] = type;
-
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Put, CMSerializer.ToStream(data), new CMRequestOptions(opts, user));
-		}
-
 		/// <summary>
 		/// Set executes a PUT request on the object being passed in. PUT requests will create a new object or replace an prior existing object if the
 		/// key (__id__, ID) already exists.
 		/// </summary>
 		/// <typeparam name="T">Any object which derives from CMObject. CMObject auto declares and creates unique identifiers and the class type</typeparam>
-		/// <param name="data"></param>
-		/// <param name="user"></param>
-		/// <param name="responseAction"></param>
-		/// <param name="opts"></param>
-		public Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts) where T : CMObject
+		/// <param name="data">CMObject to be created at the server</param>
+		/// <param name="user">the user for which this object will be created</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		public Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject
 		{
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			// only set the type if not already set and T is not CMobject
@@ -300,22 +275,44 @@ namespace CloudmineSDK.Services
 		#region Update
 
 		// Update ===========
-		public Task<CMObjectResponse> UpdateUserObject(object data, CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Updates the user object. The values posted in this request are merged with existing values on the server.
+		/// If the key you are creating already exists, isn't a simple value (such as a string or number), 
+		/// and the new value you send for it also isn't a simple value, its contents will be merged with 
+		/// the data you send. Otherwise the contents will be replaced. If the key does not exist, the 
+		/// entry will be created.
+		/// </summary>
+		/// <returns>The user object.</returns>
+		/// <param name="key">Key, __id__ where the data will be indexed</param>
+		/// <param name="value">CMObject to be uploaded</param>
+		/// <param name="user">User which contains session where the data will reside.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params..</param>
+		public Task<CMObjectResponse> UpdateUserObject(string key, object value, CMUser user, CMRequestOptions opts = null)
 		{
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts, user));
+			Dictionary<string, object> dataDict = new Dictionary<string, object>();
+			dataDict[key] = value;
+
+			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(opts, user));
 		}
 
-		public Task<CMObjectResponse> UpdateUserObject(string key, object value, CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Updates the user object. The values posted in this request are merged with existing values on the server.
+		/// If the key you are creating already exists, isn't a simple value (such as a string or number), 
+		/// and the new value you send for it also isn't a simple value, its contents will be merged with 
+		/// the data you send. Otherwise the contents will be replaced. If the key does not exist, the 
+		/// entry will be created.
+		/// </summary>
+		/// <returns>The user object.</returns>
+		/// <param name="data">CMObject to be uploaded</param>
+		/// <param name="user">User which contains session where the data will reside.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">Objects must derive from the CMObject class which ensures proper configuration.</typeparam>
+		public Task<CMObjectResponse> UpdateUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject
 		{
-			Dictionary<string, object> data = new Dictionary<string, object>();
-			data[key] = value;
+			Dictionary<string, T> dataDict = new Dictionary<string, T>();
+			dataDict[data.ID] = data;
 
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts, user));
-		}
-
-		public Task<CMObjectResponse> UpdateUserObject<T>(T data, CMUser user, CMRequestOptions opts) where T : CMObject
-		{
-			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(data), new CMRequestOptions(opts, user));
+			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(opts, user));
 		}
 
 		#endregion Update

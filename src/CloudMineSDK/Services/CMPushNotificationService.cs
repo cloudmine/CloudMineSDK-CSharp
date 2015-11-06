@@ -1,5 +1,5 @@
 ﻿using CloudmineSDK.Model;
-using CloudmineSDK.Services;
+using CloudMineSDK.Services;
 using CloudMineSDK.Model.PushNotifications;
 using System;
 using System.Collections.Generic;
