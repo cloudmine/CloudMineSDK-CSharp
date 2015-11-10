@@ -44,7 +44,7 @@ namespace CloudMineSDK.Services
 		Task<CMObjectResponse> UpdateUserObject(string key, object value, CMUser user, CMRequestOptions opts = null);
 		Task<CMObjectResponse> UpdateUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject;
 
-		Task<CMResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
+		Task<CMFileResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
 		Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts);
 	}
 }
