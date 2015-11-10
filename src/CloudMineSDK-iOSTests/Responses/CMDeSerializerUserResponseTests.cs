@@ -4,8 +4,8 @@ using System.Net;
 using System.Text;
 using CloudmineSDK.Model;
 using CloudMineSDK.Services;
+using CloudMineSDKNUnitTests.Mocks;
 using NetSDKPrivate.Model.Responses;
-using NetSDKTests.Mocks;
 using NUnit.Framework;
 
 namespace NetSDKTests

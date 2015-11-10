@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NetSDKTests.Mocks
+namespace CloudMineSDKNUnitTests.Mocks
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CMUserProfileMock : CMUserProfile
@@ -13,9 +13,6 @@ namespace NetSDKTests.Mocks
 		[JsonProperty("favorite_cafe")]
 		public string FavoriteCafe { get; set; }
 
-		public CMUserProfileMock()
-		{
-
-		}
+		public CMUserProfileMock () { }
 	}
 }

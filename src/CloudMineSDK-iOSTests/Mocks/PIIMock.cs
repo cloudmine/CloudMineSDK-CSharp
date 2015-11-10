@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using CloudmineSDK.Model;
 
-namespace CloudMineSDKiOSTests
+namespace CloudMineSDKNUnit
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	public class PIIMock: CMObject
