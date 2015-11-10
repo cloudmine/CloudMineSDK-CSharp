@@ -320,7 +320,16 @@ namespace CloudMineSDK.Services
 		#region Delete
 
 		// Delete ============
-		public Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Deletes the user object. Deletes object that match specified key. If no key is specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>The user object.</returns>
+		/// <param name="key">Key for the user object to be deleted. Also known as ID, __id__</param>
+		/// <param name="user">User.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		public Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null)
 		{
 			if (key != null)
 			{
@@ -333,16 +342,16 @@ namespace CloudMineSDK.Services
 			}
 		}
 
-		public Task<CMObjectResponse> DeleteUserObject<T>(T data, CMUser user, CMRequestOptions opts) where T : CMObject
-		{
-			if (!string.IsNullOrEmpty(data.ID))
-				return DeleteUserObject(data.ID, user, opts);
-			else {
-				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
-			}
-		}
-
-		public Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Deletes the user objects. Deletes objects that match specified keys. If no keys are specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>The user objects.</returns>
+		/// <param name="keys">Keys for the user objects to be deleted. Also known as ID, __id__</param>
+		/// <param name="user">User.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		public Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null)
 		{
 			if (keys != null && keys.Length > 0)
 			{
@@ -355,19 +364,19 @@ namespace CloudMineSDK.Services
 			}
 		}
 
-		public Task<CMObjectResponse> DeleteUserObjects<T>(List<T> data, CMUser user, CMRequestOptions opts) where T : CMObject
-		{
-			if (data != null && data.Count > 0)
-				return DeleteUserObjects(data.Select(d => d.ID).ToArray(), user, opts);
-			else {
-				throw new InvalidOperationException("Cannot delete empty data. At least one item must be present to delete.");
-			}
-		}
-
-		public Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts)
+		/// <summary>
+		/// Deletes all user objects. Deletes objects that match specified keys. If no keys are specified, no action will be taken unless 
+		/// the all=true parameter is specified in the URL. If that is specified, all data will be deleted. 
+		/// The purpose of this extra parameter is to avoid accidental total data deletion.
+		/// </summary>
+		/// <returns>The all user objects.</returns>
+		/// <param name="user">User.</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		public Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts = null)
 		{
 			if (opts == null)
-				opts = new CMRequestOptions();
+				opts = new CMRequestOptions ();
+			
 			opts.Query["all"] = true.ToString();
 			return APIService.Request<CMObjectResponse>(this.Application, "user/text", HttpMethod.Delete, null, new CMRequestOptions(opts, user));
 		}

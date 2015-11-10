@@ -13,9 +13,6 @@ namespace CloudMineSDKNUnitTests.Mocks
 		[JsonProperty("favorite_cafe")]
 		public string FavoriteCafe { get; set; }
 
-		public CMUserProfileMock()
-		{
-
-		}
+		public CMUserProfileMock () { }
 	}
 }

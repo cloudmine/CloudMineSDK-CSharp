@@ -18,11 +18,9 @@ namespace CloudMineSDK.Services
 		void ListUsers();
 		void SearchUsers();
 
-		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts);
-		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts);
-		Task<CMObjectResponse> DeleteUserObject<T>(T data, CMUser user, CMRequestOptions opts) where T : CMObject;
-		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts);
-		Task<CMObjectResponse> DeleteUserObjects<T>(List<T> data, CMUser user, CMRequestOptions opts) where T : CMObject;
+		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts = null);
+		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null);
+		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null);
 
 		Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, List<string> keys, CMRequestOptions opts = null);
