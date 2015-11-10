@@ -97,18 +97,7 @@
     <Compile Include="Responses\CMDeserializeObjectACLTests.cs" />
     <Compile Include="Responses\CMDeserializerObjectResponseTests.cs" />
     <Compile Include="Responses\CMDeSerializerUserResponseTests.cs" />
-    <Compile Include="CMTouchRunner.cs" />
     <Compile Include="Resources\CMSerializeObjectACLTests.cs" />
-    <Compile Include="CMAppObjDeleteTests.cs" />
-    <Compile Include="CMAppObjGetTests.cs" />
-    <Compile Include="CMAppObjSearchTests.cs" />
-    <Compile Include="CMAppObjSetTests.cs" />
-    <Compile Include="CMAppObjUpdateTests.cs" />
-    <Compile Include="CMPushNotificationTests.cs" />
-    <Compile Include="CMUserAuthTests.cs" />
-    <Compile Include="CMUserObjDeleteTests.cs" />
-    <Compile Include="CMUserObjSetTests.cs" />
-    <Compile Include="CMUserObjUpdateTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
