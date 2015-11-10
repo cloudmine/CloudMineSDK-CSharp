@@ -5,11 +5,11 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle ("CloudMineSDK")]
-[assembly: AssemblyDescription ("")]
+[assembly: AssemblyDescription ("The CloudMine C# SDK")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("")]
+[assembly: AssemblyCompany ("CloudMine, Inc.")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("ryandonahue")]
+[assembly: AssemblyCopyright ("2015 by CloudMine. Licensed under the MIT License.")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 
