@@ -424,10 +424,13 @@ namespace CloudMineSDK.Services
 		/// <param name="data">Stream of the binary to be uploaded.</param>
 		/// <param name="user">User file uploads requires a user with a valid sessions token.</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
-		public Task<CMResponse> Upload(string key, Stream data, CMUser user, CMRequestOptions opts)
+		public Task<CMFileResponse> Upload(string key, Stream data, CMUser user, CMRequestOptions opts)
 		{
-			if (opts == null)
-				opts = new CMRequestOptions();
+			if (opts == null) {
+				opts = new CMRequestOptions ();
+				opts.ContentType = "application/octet-stream";
+			}
+
 			if (!string.IsNullOrEmpty(user.Session))
 			{
 				opts.Headers["X-CloudMine-SessionToken"] = user.Session;
@@ -441,8 +444,10 @@ namespace CloudMineSDK.Services
 		// Download file ========
 		public Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts)
 		{
-			if (opts == null)
-				opts = new CMRequestOptions();
+			if (opts == null) {
+				opts = new CMRequestOptions ();
+				opts.ContentType = "application/octet-stream";
+			}
 			
 			if (!string.IsNullOrEmpty(user.Session))
 			{
