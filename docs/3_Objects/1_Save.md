@@ -1,35 +1,36 @@
 # Save Objects
 
-Individual "CMObject"s can be saved by calling "SetObject" variants on the "CMAppObjectService" which implements the "IAppObjectService" Interface definition. CMAppObjectService makes it easy to work with your preferred dependency injection methods to manage the application and api keys being worked with.
+Instances of `CMObject` can be saved by calling the `SetObject()` variants on the `CMAppObjectService` which implements the `IAppObjectService` interface. `CMAppObjectService` makes it easy to work with your preferred dependency injection methods to manage the application and API keys being worked with.
 
-CMAppObjectService set methods can be invoked by passing in a CMObject type or by passing in an object and a key value. It is advised to leverage CMObject for things like auto ID and time stamping. 
+`CMAppObjectService`'s set methods can be invoked by passing in a `CMObject` instance or by passing in an object and a key value. We recommend you use `CMObject` when writing production code so you can take advantage of automatic ID generation and client-side timestamping.
 
-### Single object with Type Explicit
+In the examples below, once `objResponse.Wait()` has returned this indicates that the communication with CloudMine has completed.
+
+## Single Object with Explicit Type
 
 ```csharp
-HCPMock hcp = new HCPMock () {
-	ProviderName = "CloudMine Data Hospital 3",
-	ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107",
-	ProviderEmployeeCount = 25
+CareProvider cp = new CareProvider () {
+	ProviderName = "Mercy Hospital",
+	ProviderAddress = "1234 Market Street, Suite 100, Philadelphia, PA 19107",
+	ProviderEmployeeCount = 431
 };
 
 CMApplication app = new CMApplication (appID, apiKey);
 IRestWrapper api = new PCLRestWrapper ();
 appObjSrvc = new CMAppObjectService (app, api);
 
-Task<CMObjectResponse> objResponse = 
-	appObjSrvc.SetObject<HCPMock> (hcp);
+Task<CMObjectResponse> objResponse = appObjSrvc.SetObject<CareProvider> (cp);
 objResponse.Wait ();
 ```
 
-### Single object with key & dyanmic object
+## Single Object with Dynamic Type
 
 ```csharp
-dynamic hcp = new ExpandoObject ();
-hcp.__class__ = "HCPDynamic";
-hcp.ProviderName = "CloudMine Data Hospital 2";
-hcp.ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107";
-hcp.ProviderEmployeeCount = 25;
+dynamic cp = new ExpandoObject ();
+cp.__class__ = "CareProvider";
+cp.ProviderName = "Mercy Hospital";
+cp.ProviderAddress = "1234 Market Street, Suite 100, Philadelphia, PA 19107";
+cp.ProviderEmployeeCount = 431;
 
 var id = Guid.NewGuid ().ToString ();
 
@@ -37,7 +38,6 @@ CMApplication app = new CMApplication (appID, apiKey);
 IRestWrapper api = new PCLRestWrapper ();
 appObjSrvc = new CMAppObjectService (app, api);
 
-Task<CMObjectResponse> objResponse = 
-	appObjSrvc.SetObject (hcp, null, id);
+Task<CMObjectResponse> objResponse = appObjSrvc.SetObject (cp, null, id);
 objResponse.Wait ();
 ```

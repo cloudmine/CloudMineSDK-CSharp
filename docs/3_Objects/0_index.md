@@ -1,23 +1,31 @@
-# APPLICATION DATA
+# Application Data
 
-When it comes to modeling your data in CloudMine, you have two options. First is strongly creating you model classes which inherit from the base CMObject class. This is recommended as CMObject has alot of the makings for a complete and manageable model at the server. CMObject derived classes also have the luxury of working with similarly defined objects across the other CloudMine offered SDKs. It is also possible to work with dynamic C# objects which is nice for stubbing data for use in integration tests or just testing functionality out. 
+When it comes to modeling your data in CloudMine, you have two options.
+
+The first option is strongly creating model classes that inherit from the base `CMObject` class. This is the recommended approach, as `CMObject` has a well-defined structure which makes it easier to work with as your app evolves over time. `CMObject`-derived classes also have the luxury of working with similarly defined objects across the other CloudMine offered SDKs.
+
+The second option is to work with dynamic C# objects. This is nice for stubbing data for use in integration tests, testing functionality out, or rapidly prototyping a part of your app before you're certain of the exact data model.
 
 
-### CMObject
+## CMObject
 
-This approach is more powerful and saves you from having to add and extract fields manually. You start by defining a class that extends from CMObject. The default empty constructor on the base class will automatically generate a new Guid for the key and specify the type (__class__). Derived objects should call the base constructor or implement one as deemed appropriate.
+Start by defining a class that extends from `CMObject`. The default empty constructor on the base class will automatically generate a new `Guid` for the key and automatically specify the correct value for the `__class__` field. This is used to deserialize over-the-wire objects into their proper type. **All derived objects should call the base constructor must call the base constructor such that the `CMObject` constructor is called last in the chain.**
 
-CloudMine objects are deserialized to a specific class based on their __class__ property. The C# SDK uses `GetType().Name` as the default. 
+CloudMine objects are deserialized to a specific class based on their `__class__` property. When serializing, `GetType().Name` is used as the default value.
 
-If you are working with objects from a prior design and wish to rename them you can specify how a property or class should be serialized and deserialized with Newtonsoft JSON attributes such as:
+### Overriding Property Names
+
+If you are working with objects from a prior design, or that are consumed by other platforms and have different names, and wish to override how they are named when stored on CloudMine you can use [Newtonsoft JSON](http://www.newtonsoft.com/json/help/html/SerializationGuide.htm) attributes such as:
 
 ```csharp
 [JsonProperty("loc", NullValueHandling=NullValueHandling.Ignore)]
 public CMLocation Location { get; set; }
 ```
-The above example illustrates how the Location property on an object will get mapped to and from '__loc__' on serialization and deserialization.
+In this example, the `Location` property on this class will be serialized into a property named `loc` when saved to CloudMine. Similarly, the `loc` field will be mapped to `Location` locally when deserialized from CloudMine. See the documentation for [JsonProperty](http://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) for more information.
 
-Below is an example of a healthcare provider class definition: 
+### Example CMObject Subclass
+
+Let's take a look at an example of a healthcare provider class definition:
 
 ```csharp
 using System;
@@ -27,7 +35,7 @@ using CloudmineSDK.Model;
 namespace HealthcareApp
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class HCPMock: CMObject
+	public class CareProvider: CMObject
 	{
 		[JsonProperty("ProviderName", NullValueHandling=NullValueHandling.Ignore)]
 		public string ProviderName { get; set; }
@@ -38,7 +46,7 @@ namespace HealthcareApp
 		[JsonProperty("ProviderEmployeeCount", NullValueHandling=NullValueHandling.Ignore)]
 		public int ProviderEmployeeCount { get; set; }
 
-		public HCPMock (): base()
+		public CareProvider (): base()
 		{
 		}
 	}
@@ -46,4 +54,4 @@ namespace HealthcareApp
 
 ```
 
-Now that you know how to make your models, let's look at doing something with them.
+Notice that we've set the `MemberSerialization` of the `CareProvider ` class to `MemberSerialization.OptIn`. For more information on this, see the documentation for [JsonObject](http://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonObjectAttribute.htm) and the [MemberSerialization](http://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_MemberSerialization.htm).
