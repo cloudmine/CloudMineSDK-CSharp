@@ -23,8 +23,6 @@ namespace CloudMineSDK.Services
 		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null);
 
 		Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts = null) where T : CMObject;
-		Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, List<string> keys, CMRequestOptions opts = null);
-		Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, string[] keys, CMRequestOptions opts = null);
 		Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, List<string> keys, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, string[] keys, CMRequestOptions opts = null) where T : CMObject;
 
@@ -36,8 +34,7 @@ namespace CloudMineSDK.Services
 		Task<CMResponse> ResetPassword(string token, string newPassword);
 		Task<CMResponse> ResetPasswordRequest(string email);
 
-		Task<CMObjectSearchResponse> SearchUserObjects(string query, CMUser user,CMRequestOptions opts);
-		Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(string query, CMUser user, CMRequestOptions opts) where T : CMObject;
+		Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts) where T : CMObject;
 
 		Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject;
 

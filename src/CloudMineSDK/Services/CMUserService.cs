@@ -176,7 +176,7 @@ namespace CloudMineSDK.Services
 		/// password reset email), and another to fulfill that request and submit the new password.
 		/// </summary>
 		/// <returns>The password request.</returns>
-		/// <param name="email">Email.</param>
+		/// <param name="email">Email address of the user.</param>
 		public Task<CMResponse> ResetPasswordRequest(string email)
 		{
 			Dictionary<string, string> data = new Dictionary<string, string>();
@@ -206,6 +206,15 @@ namespace CloudMineSDK.Services
 		#region Get
 
 		// Get ==============
+		/// <summary>
+		/// Gets an object of type CMObject by (key,__id__) and returns that Type
+		/// automatically parsed into the proper type in the Success field of the results.
+		/// </summary>
+		/// <returns>The user object.</returns>
+		/// <param name="user">User with session to use in the request.</param>
+		/// <param name="key">key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">a Type which derives from CMObject. Used to parse results</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null) opts = new CMRequestOptions(user);
@@ -214,27 +223,27 @@ namespace CloudMineSDK.Services
 			return APIService.Request<CMObjectFetchResponse<T>>(this.Application, "user/text", HttpMethod.Get, null, opts);
 		}
 
-		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, List<string> keys, CMRequestOptions opts = null)
-		{
-			return GetUserObjects<CMObject>(user, keys.ToArray(), opts);
-		}
-
+		/// <summary>
+		///  Gets objects of type CMObject by (key,__id__) and returns that Type
+		/// </summary>
+		/// <returns>The user objects.</returns>
+		/// <param name="user">User with session to use in the request.</param>
+		/// <param name="keys">Collection of key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, List<string> keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			return GetUserObjects<T>(user, keys.ToArray(), opts);
 		}
 
-		public Task<CMObjectFetchResponse<CMObject>> GetUserObjects(CMUser user, string[] keys, CMRequestOptions opts = null)
-		{
-			if (keys.Length > 0)
-			{
-				if (opts == null) opts = new CMRequestOptions(user);
-				opts.Headers["keys"] = String.Join(",", keys);
-			}
-
-			return APIService.Request<CMObjectFetchResponse<CMObject>>(this.Application, "user/text", HttpMethod.Get, null, opts);
-		}
-
+		/// <summary>
+		/// Gets the user objects.
+		/// </summary>
+		/// <returns>The user objects.</returns>
+		/// <param name="user">User with session to use in the request.</param>
+		/// <param name="keys">Collection of key,__id__,ID</param>
+		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, string[] keys, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (keys.Length > 0)
@@ -384,17 +393,7 @@ namespace CloudMineSDK.Services
 		#endregion Delete
 
 		#region Search
-
 		// Search =============
-		public Task<CMObjectSearchResponse> SearchUserObjects(string query, CMUser user, CMRequestOptions opts)
-		{
-			if (opts == null)
-				opts = new CMRequestOptions();
-			opts.Query["q"] = query;
-
-			return APIService.Request<CMObjectSearchResponse>(this.Application, "user/search", HttpMethod.Get, null, new CMRequestOptions(opts, user));
-		}
-
 		/// <summary>
 		/// Performs a search query based on the string query and ensures the type of the query results
 		/// are of the generic type parameter.
@@ -403,7 +402,7 @@ namespace CloudMineSDK.Services
 		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
 		/// <param name="user"></param>
 		/// <param name="opts"></param>
-		public Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(string query, CMUser user, CMRequestOptions opts) where T : CMObject
+		public Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts) where T : CMObject
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -416,7 +415,6 @@ namespace CloudMineSDK.Services
 		#endregion Search
 
 		#region File
-
 		/// <summary>
 		///
 		/// </summary>
@@ -438,7 +436,7 @@ namespace CloudMineSDK.Services
 				opts.SnippetParams.Add("user_id", user.UserID ?? string.Empty);
 			}
 
-			return APIService.Request(this.Application, "user/binary/" + key, HttpMethod.Put, data, new CMRequestOptions(opts, user));
+			return APIService.Request<CMFileResponse>(this.Application, "user/binary/" + key, HttpMethod.Put, data, new CMRequestOptions(opts, user));
 		}
 
 		// Download file ========
