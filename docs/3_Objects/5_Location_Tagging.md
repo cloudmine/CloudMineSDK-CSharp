@@ -1,11 +1,9 @@
-# Geolocation Tagging and Searching
-
-### Specifying a location field
+# Location Tagging
 
 CloudMine supports attaching location information to objects. The base CMObject class has a Location member which is ignored while null. Any object which derives from CMObject can set the Location field and the value will be handled and indexed at the server.
 
 ```csharp
-HCPMock hcp = new HCPMock () {
+CareProvider cp = new CareProvider () {
 	ProviderName = "CloudMine Data Hospital 3",
 	ProviderAddress = "1217 Sansom Street | Suite 600, Philadelphia, PA 19107",
 	ProviderEmployeeCount = 25,
@@ -13,7 +11,7 @@ HCPMock hcp = new HCPMock () {
 };
 
 Task<CMObjectResponse> objResponse = 
-	cmAppObjectService.SetObject <HCPMock> (hcp);
+	cmAppObjectService.SetObject <CareProvider> (cp);
 objResponse.Wait ();
 ```
 
