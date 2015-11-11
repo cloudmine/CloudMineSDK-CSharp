@@ -10,11 +10,28 @@ namespace CloudMineSDK.Services
 {
     public class PCLRestWrapper : IRestWrapper
     {
+		/// <summary>
+		/// Request the specified app, action, method, content and options.
+		/// </summary>
+		/// <param name="app">An instance of application ID and API key.</param>
+		/// <param name="action">URL action which the platform should execute ("user/binary/", "user/search")</param>
+		/// <param name="method">HTTP method type which the action uses (PUT, POST, GET, DELETE)</param>
+		/// <param name="content">Content stream to be sent in the body. Also can be passed through on options</param>
+		/// <param name="options">CMRequestOptions which contains the necessary values for query parameters and headers.</param>
 		public Task<CMResponse> Request(CMApplication app, string action, HttpMethod method, Stream content, CMRequestOptions options)
         {
 			return Request<CMResponse>(app, action, method, content, options);
         }
 
+		/// <summary>
+		/// Request the specified app, action, method, content and options.
+		/// </summary>
+		/// <param name="app">An instance of application ID and API key.</param>
+		/// <param name="action">URL action which the platform should execute ("user/binary/", "user/search")</param>
+		/// <param name="method">HTTP method type which the action uses (PUT, POST, GET, DELETE)</param>
+		/// <param name="content">Content stream to be sent in the body. Also can be passed through on options</param>
+		/// <param name="options">CMRequestOptions which contains the necessary values for query parameters and headers.</param>
+		/// <typeparam name="T">CMResponse type derivative which wraps the return shape in the task response.</typeparam>
 		public async Task<T> Request<T>(CMApplication app, string action, HttpMethod method, Stream content, CMRequestOptions options) where T: CMResponse, new()
         {
 			HttpClientHandler clientHandler = new HttpClientHandler()
@@ -87,6 +104,14 @@ namespace CloudMineSDK.Services
 			}
         }
 
+		/// <summary>
+		/// Generates the CM response object given the proper CMResponse type.
+		/// All responses inherit from CMResponse so if the return type is known
+		/// the base objcet contains everything needed to drill down.
+		/// </summary>
+		/// <returns>The CM response object.</returns>
+		/// <param name="response">Response.</param>
+		/// <typeparam name="T">CMResponse derivative</typeparam>
 		public async Task<T> GenerateCMResponseObject<T>(HttpResponseMessage response) where T: CMResponse, new()
 		{
 			using (HttpContent content = response.Content)
@@ -108,6 +133,14 @@ namespace CloudMineSDK.Services
 			}
 		}
 
+
+		/// <summary>
+		/// Take a set of request options and extracts the proper query
+		/// parameters. Does not deal with the necessary headers used
+		/// in a CM REST call.
+		/// </summary>
+		/// <returns>The cloud mine query.</returns>
+		/// <param name="opts">Opts.</param>
         public List<string> GetCloudMineQuery(CMRequestOptions opts)
         {
             List<string> query = new List<string>();
