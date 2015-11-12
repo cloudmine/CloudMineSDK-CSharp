@@ -13,10 +13,10 @@ namespace CloudMineSDK.Services
 		Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts = null);
 
 		// Theses are the not yet implemented interface methods. Haven't decided the proper return shape yet
-		void CurrentUserProfile();
-		void UpdateUserProfile();
-		void ListUsers();
+		void ListUsers<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
 		void SearchUsers();
+		void CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		void UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
 
 		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null);

@@ -21,6 +21,13 @@ namespace CloudmineSDK.Model
         private Dictionary<string, string> parameters;
         const string DEFAULT_TYPE = "application/json";
 
+		/// <summary>
+		/// Denotes the root URL of the CloudMine API endpoints. Examples
+		/// include but not limited to: {"api.cloudmine.me", "secure.cloudmine.me", 
+		/// "testing.cloudmine.me"}
+		/// </summary>
+		public string BaseURL = "api.cloudmine.me";
+
         public CMRequestOptions()
         {
             this.headers = new Dictionary<string, string>();

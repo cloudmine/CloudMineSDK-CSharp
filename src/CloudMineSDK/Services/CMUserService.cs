@@ -463,7 +463,7 @@ namespace CloudMineSDK.Services
 		 * Here is the TODO for the services not yet implemented but not impeding completion based on 
 		 * other methods which can be leveraged to achieve the same results
 		 */
-		public void ListUsers()
+		public void ListUsers<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
 			throw new NotImplementedException();
 		}
@@ -473,12 +473,12 @@ namespace CloudMineSDK.Services
 			throw new NotImplementedException();
 		}
 
-		public void CurrentUserProfile()
+		public void CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
 			throw new NotImplementedException();
 		}
 
-		public void UpdateUserProfile()
+		public void UpdateUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
 			throw new NotImplementedException();
 		}

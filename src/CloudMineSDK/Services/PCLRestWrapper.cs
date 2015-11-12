@@ -44,7 +44,7 @@ namespace CloudMineSDK.Services
 
 				// Set various query options.
 				List<string> query = GetCloudMineQuery(opts);
-				Uri uri = GetCloudmineUri(app.APIVersion, app.ApplicationID, action, query);
+				Uri uri = GetCloudmineUri(options.BaseURL ?? "api.cloudmine.me", app.APIVersion, app.ApplicationID, action, query);
 				httpClient.BaseAddress = uri;
 
 				if (opts.Credentials != null)
@@ -168,11 +168,11 @@ namespace CloudMineSDK.Services
             return query;
         }
 
-        private Uri GetCloudmineUri(string version, string applicationID, string action, List<string> query)
+		private Uri GetCloudmineUri(string baseURL, string version, string applicationID, string action, List<string> query)
         {
             UriBuilder ub = new UriBuilder();
             ub.Scheme = "https";
-            ub.Host = "api.cloudmine.me";
+			ub.Host = baseURL;
 			ub.Path = string.Format ("{0}/app/{1}/{2}", version, applicationID, action);
             ub.Query = String.Join("&", query.ToArray(), 0, query.Count);
 
