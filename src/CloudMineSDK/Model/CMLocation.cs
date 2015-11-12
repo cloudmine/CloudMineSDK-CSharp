@@ -7,7 +7,7 @@ namespace CloudMineSDK
 	public class CMLocation
 	{
 		[JsonProperty("__type__")]
-		private const string __type__ = "geo";
+		private const string __type__ = "geopoint";
 
 		[JsonProperty("longitude")]
 		public double Longitude { get; set; }
