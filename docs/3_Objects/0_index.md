@@ -1,5 +1,7 @@
 # Application Data
 
+Application objects can be seen and modified by anyone using the application, so long as the API key used to access the data has permissions to do so.
+
 When it comes to modeling your data in CloudMine, you have two options.
 
 The first option is strongly creating model classes that inherit from the base `CMObject` class. This is the recommended approach, as `CMObject` has a well-defined structure which makes it easier to work with as your app evolves over time. `CMObject`-derived classes also have the luxury of working with similarly defined objects across the other CloudMine offered SDKs.

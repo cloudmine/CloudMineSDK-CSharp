@@ -1,22 +1,29 @@
 # Upload New File to Application
 
-In addition to object data, you are also able to store files in CloudMine. A stream of the file contents, a file id, and an optional MIME content type are needed to create a CMFile. If no content type is specified, a default of "application/octet-stream" is used.
+In addition to object data, you are also able to store arbitrary files in CloudMine. A stream of the file contents, a file ID, and an optional MIME type are needed to create a CMFile. The MIME type can be specified by supplying the third (optional) parameter to the `Upload` method of type `CMRequestOptions`. If no MIME type is specified, a default of `application/octet-stream` is used.
+
+The content type supplied during upload is what will be presented in the `Content-Type` header during download.
+
+In the example below, we assume that `image.png` is an image that is located in the application's bundle and is readable to the app.
 
 ```csharp
-using (FileStream fileStream = File.OpenRead(filePath))
+using (FileStream fileStream = File.OpenRead("image.png"))
 {
     MemoryStream memStream = new MemoryStream();
     memStream.SetLength(fileStream.Length);
     fileStream.Read(memStream.GetBuffer(), 0, (int)fileStream.Length);
     
     CMApplication app = new CMApplication (appID, apiKey);
-	IRestWrapper api = new PCLRestWrapper ();
-	appObjSrvc = new CMAppObjectService (app, api);
+    IRestWrapper api = new PCLRestWrapper ();
+    appObjSrvc = new CMAppObjectService (app, api);
 
-	Task<CMFileResponse> fileResponse = 
-   		appObjSrvc.Upload ("iej20...", fileStream);
-	fileResponse.wait ();
+    CMRequestOptions opts = new CMRequestOptions() {
+        ContentType = "image/png"
+    };
+    Task<CMFileResponse> fileResponse = 
+        appObjSrvc.Upload ("the-picture-id", fileStream, opts);
+    fileResponse.wait ();
 }
 ```
 
-{{warning "If the file id given already exists on the server, the existing file will be overwritten."}}
+{{warning "If the file ID given already exists on the server, the existing file will be overwritten."}}

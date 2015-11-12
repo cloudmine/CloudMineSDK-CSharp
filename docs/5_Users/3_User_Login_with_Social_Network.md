@@ -1,3 +1,3 @@
 # User Login with Social Network
 
-{{note 'Documentation coming soon.'}}
+{{note 'Not supported yet in the C# SDK. Documentation coming soon.'}}
