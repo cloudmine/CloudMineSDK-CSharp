@@ -459,28 +459,79 @@ namespace CloudMineSDK.Services
 
 		#endregion File
 
-		/*
-		 * Here is the TODO for the services not yet implemented but not impeding completion based on 
-		 * other methods which can be leveraged to achieve the same results
-		 */
-		public void ListUsers<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMResponse> ListUsers<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
-			throw new NotImplementedException();
+			return APIService.Request<CMResponse>(this.Application, "appid/account/", HttpMethod.Get, null, new CMRequestOptions(opts, user));
 		}
 
-		public void SearchUsers()
+		public Task<CMResponse> SearchUsers(CMUser user, string query, CMRequestOptions opts)
 		{
-			throw new NotImplementedException();
+			if (opts == null)
+				opts = new CMRequestOptions();
+
+			if (string.IsNullOrEmpty(opts.Query["q"]))
+				opts.Query["q"] = query;
+
+			return APIService.Request<CMResponse>(this.Application, "account/search/", HttpMethod.Get, null, new CMRequestOptions(opts, user));
 		}
 
-		public void CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMUserResponse<T>> CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
-			throw new NotImplementedException();
+			if (opts == null)
+				opts = new CMRequestOptions();
+			
+			if (!string.IsNullOrEmpty(user.Session))
+			{
+				opts.Headers["X-CloudMine-SessionToken"] = user.Session;
+				opts.SnippetParams.Add("session_token", user.Session ?? string.Empty);
+				opts.SnippetParams.Add("user_id", user.UserID ?? string.Empty);
+			}
+
+			return APIService.Request<CMUserResponse<T>>(this.Application, "account/mine/", HttpMethod.Get, null, new CMRequestOptions(opts, user));
 		}
 
-		public void UpdateUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		/// <summary>
+		/// Replaces the user profile via a PUT call.
+		/// </summary>
+		/// <returns>The user profile.</returns>
+		/// <param name="user">User containg the profile to be replaced with valid session token.</param>
+		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
+		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
+		public Task<CMResponse> UpdateUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
-			throw new NotImplementedException();
+			if (opts == null)
+				opts = new CMRequestOptions();
+
+			if (!string.IsNullOrEmpty(user.Session))
+			{
+				opts.Headers["X-CloudMine-SessionToken"] = user.Session;
+				opts.SnippetParams.Add("session_token", user.Session ?? string.Empty);
+				opts.SnippetParams.Add("user_id", user.UserID ?? string.Empty);
+			}
+				
+			return APIService.Request<CMResponse>(this.Application, "account/", HttpMethod.Put, CMSerializer.ToStream(user.Profile), new CMRequestOptions(opts, user));
+		}
+
+		/// <summary>
+		/// Merges the user profile via a POST call.
+		/// </summary>
+		/// <returns>The user profile.</returns>
+		/// <param name="user">User containg the profile to be replaced with valid session token.</param>
+		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
+		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
+		public Task<CMResponse> MergeUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		{
+			if (opts == null)
+				opts = new CMRequestOptions();
+
+			if (!string.IsNullOrEmpty(user.Session))
+			{
+				opts.Headers["X-CloudMine-SessionToken"] = user.Session;
+				opts.SnippetParams.Add("session_token", user.Session ?? string.Empty);
+				opts.SnippetParams.Add("user_id", user.UserID ?? string.Empty);
+			}
+
+			return APIService.Request<CMResponse>(this.Application, "account/", HttpMethod.Post, CMSerializer.ToStream(user.Profile), new CMRequestOptions(opts, user));
 		}
 	}
 }

@@ -12,12 +12,6 @@ namespace CloudMineSDK.Services
 		Task<CMResponse> DeleteUser(CMUser user);
 		Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts = null);
 
-		// Theses are the not yet implemented interface methods. Haven't decided the proper return shape yet
-		void ListUsers<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
-		void SearchUsers();
-		void CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
-		void UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
-
 		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null);
 		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null);
@@ -43,5 +37,11 @@ namespace CloudMineSDK.Services
 
 		Task<CMFileResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
 		Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts);
+
+		Task<CMResponse> ListUsers<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		Task<CMResponse> SearchUsers (CMUser user, string query, CMRequestOptions opts);
+		Task<CMUserResponse<T>> CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		Task<CMResponse> UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		Task<CMResponse> MergeUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
 	}
 }
