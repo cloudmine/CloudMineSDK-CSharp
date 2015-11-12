@@ -6,6 +6,9 @@ namespace CloudMineSDK
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CMLocation
 	{
+		[JsonProperty("__type__")]
+		private const string __type__ = "geo";
+
 		[JsonProperty("longitude")]
 		public double Longitude { get; set; }
 
