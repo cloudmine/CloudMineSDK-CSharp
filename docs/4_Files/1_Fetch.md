@@ -1,12 +1,13 @@
 # Fetch Files
 
-Unlike objects, files can only be loaded one at a time.
+{{note 'Files can only be downloaded one at a time.'}}
 
-Files are retireved to a `CMFileResponse` object which contains the returned stream based on the key passed into the Download method on the app or user service.
+When files are downloaded, they are stored in memory inside a `CMFileResponse` object as a stream, within the `DataStream` propety.
 
 ```csharp
 Task<CMFileResponse> fileResponse = 
-   		appObjSrvc.Download ("iej20...");
-fileResponse.wait ();
+   		cmAppObjectService.Download ("the-picture-id");
+fileResponse.Wait ();
+// fileResponse.DataStream contains the file's data
 ```
 

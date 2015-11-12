@@ -1,4 +1,5 @@
 # User Logout
+
 Once a user has a valid session token, it can be invalidated by logging the user out.
 
 ```csharp
