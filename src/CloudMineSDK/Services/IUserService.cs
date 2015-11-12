@@ -38,7 +38,7 @@ namespace CloudMineSDK.Services
 		Task<CMFileResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
 		Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts);
 
-		Task<CMResponse> ListUsers<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		Task<CMResponse> ListUsers (CMRequestOptions opts);
 		Task<CMResponse> SearchUsers (CMUser user, string query, CMRequestOptions opts);
 		Task<CMUserResponse<T>> CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
 		Task<CMResponse> UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;

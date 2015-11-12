@@ -72,7 +72,7 @@ namespace CloudMineSDK.Services
 		#region Set
 
 		/// <summary>
-		/// Method to create objects under a particular user. If the id exists already, the object will replace the existing object.
+		/// Method to create application level objects. If the id exists already, the object will replace the existing object.
 		/// </summary>
 		/// <param name="key">the id to classify the object under. defaults to the type of object value being passed in</param>
 		/// <param name="value">the cloudmine object being created</param>

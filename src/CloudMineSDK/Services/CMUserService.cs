@@ -459,9 +459,12 @@ namespace CloudMineSDK.Services
 
 		#endregion File
 
-		public Task<CMResponse> ListUsers<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMResponse> ListUsers(CMRequestOptions opts)
 		{
-			return APIService.Request<CMResponse>(this.Application, "appid/account/", HttpMethod.Get, null, new CMRequestOptions(opts, user));
+			if (opts == null)
+				opts = new CMRequestOptions();
+			
+			return APIService.Request<CMResponse>(this.Application, "appid/account/", HttpMethod.Get, null, opts);
 		}
 
 		public Task<CMResponse> SearchUsers(CMUser user, string query, CMRequestOptions opts)
@@ -475,6 +478,14 @@ namespace CloudMineSDK.Services
 			return APIService.Request<CMResponse>(this.Application, "account/search/", HttpMethod.Get, null, new CMRequestOptions(opts, user));
 		}
 
+		/// <summary>
+		/// Returns the current user profile. Good to use when you have a cached session token 
+		/// but not the latest instance of the profile object.
+		/// </summary>
+		/// <returns>The user profile.</returns>
+		/// <param name="user">Instance of CMUser with a valid session token</param>
+		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
+		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
 		public Task<CMUserResponse<T>> CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
 		{
 			if (opts == null)
