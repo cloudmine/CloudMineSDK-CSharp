@@ -2,16 +2,16 @@
 
 `CMAppObjectService` offers a few ways to remove objects by ID. `DeleteObject`, `DeleteObjects` and `DeleteAllObjects` are the methods used to remove objects from CloudMine.
 
-### Deleting an object
+## Deleting an object
 
-Calling the `DeleteObject` method takes the ID of the object to be deleted as the only parameter.
+Calling the `DeleteObject` method takes the ID of the object to be deleted.
 
 ```csharp
 Task<CMObjectResponse> delResponse =
 	cmAppObjectService.DeleteObject ("fe232f...");
 ```
 
-### Deleting multiple objects
+## Deleting multiple objects
 
 Deleting multiple objects is done in the same way except the `DeleteObjects` method is leveraged with a list of ID to be deleted.
 
