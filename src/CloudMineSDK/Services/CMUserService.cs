@@ -467,6 +467,14 @@ namespace CloudMineSDK.Services
 			return APIService.Request<CMResponse>(this.Application, "appid/account/", HttpMethod.Get, null, opts);
 		}
 
+
+		/// <summary>
+		/// Searchs the user profiles of an application given a CloudMine search query string.
+		/// </summary>
+		/// <returns>The users.</returns>
+		/// <param name="user">User.</param>
+		/// <param name="query">Query.</param>
+		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
 		public Task<CMResponse> SearchUsers(CMUser user, string query, CMRequestOptions opts)
 		{
 			if (opts == null)
