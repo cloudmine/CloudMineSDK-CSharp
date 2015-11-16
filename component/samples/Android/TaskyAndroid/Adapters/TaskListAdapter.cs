@@ -7,17 +7,17 @@ namespace TaskyAndroid.Adapters {
 	/// <summary>
 	/// Adapter that presents Tasks in a row-view
 	/// </summary>
-	public class TaskListAdapter : BaseAdapter<Task> {
+	public class TaskListAdapter : BaseAdapter<Todo> {
 		Activity context = null;
-		IList<Task> tasks = new List<Task>();
+		IList<Todo> tasks = new List<Todo>();
 		
-		public TaskListAdapter (Activity context, IList<Task> tasks) : base ()
+		public TaskListAdapter (Activity context, IList<Todo> tasks) : base ()
 		{
 			this.context = context;
 			this.tasks = tasks;
 		}
 		
-		public override Task this[int position]
+		public override Todo this[int position]
 		{
 			get { return tasks[position]; }
 		}

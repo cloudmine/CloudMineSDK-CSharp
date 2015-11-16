@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Widget;
 using Tasky.Core;
 using TaskyAndroid;
+using System.Linq;
 
 namespace TaskyAndroid.Screens {
 	/// <summary>
@@ -13,7 +14,7 @@ namespace TaskyAndroid.Screens {
 	[Activity (Label = "Tasky", MainLauncher = true, Icon="@drawable/icon")]			
 	public class HomeScreen : Activity {
 		Adapters.TaskListAdapter taskList;
-		IList<Task> tasks;
+		IList<Todo> tasks;
 		Button addTaskButton;
 		ListView taskListView;
 		
@@ -45,11 +46,13 @@ namespace TaskyAndroid.Screens {
 			}
 		}
 		
-		protected override void OnResume ()
+		protected override async void OnResume ()
 		{
 			base.OnResume ();
 
-			tasks = TaskManager.GetTasks();
+			var getResponse = await TodoManager.GetTodos();
+
+			tasks = getResponse.Success.Values.ToList();
 			
 			// create our adapter
 			taskList = new Adapters.TaskListAdapter(this, tasks);

@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using Tasky.Core;
 using TaskyAndroid;
+using System.Linq;
 
 namespace TaskyAndroid.Screens {
 	/// <summary>
@@ -11,19 +12,20 @@ namespace TaskyAndroid.Screens {
 	/// </summary>
 	[Activity (Label = "TaskDetailsScreen")]			
 	public class TaskDetailsScreen : Activity {
-		Task task = new Task();
+		Todo task = new Todo();
 		Button cancelDeleteButton;
 		EditText notesTextEdit;
 		EditText nameTextEdit;
 		Button saveButton;
 
-		protected override void OnCreate (Bundle bundle)
+		protected override async void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			
-			int taskID = Intent.GetIntExtra("TaskID", 0);
-			if(taskID > 0) {
-				task = TaskManager.GetTask(taskID);
+			string taskID = Intent.GetStringExtra("TaskID") ?? string.Empty;
+			if(!string.IsNullOrEmpty(taskID)) {
+				var getResponse = await TodoManager.GetTodo(taskID);
+				task = getResponse.Success.FirstOrDefault().Value;
 			}
 			
 			// set our layout to be the home screen
@@ -36,7 +38,7 @@ namespace TaskyAndroid.Screens {
 			cancelDeleteButton = FindViewById<Button>(Resource.Id.CancelDeleteButton);
 			
 			// set the cancel delete based on whether or not it's an existing task
-			cancelDeleteButton.Text = (task.ID == 0 ? "Cancel" : "Delete");
+			cancelDeleteButton.Text = "Delete";
 			
 			nameTextEdit.Text = task.Name; 
 			notesTextEdit.Text = task.Notes;
@@ -46,19 +48,17 @@ namespace TaskyAndroid.Screens {
 			saveButton.Click += (sender, e) => { Save(); };
 		}
 
-		void Save()
+		async void Save()
 		{
 			task.Name = nameTextEdit.Text;
 			task.Notes = notesTextEdit.Text;
-			TaskManager.SaveTask(task);
+			await TodoManager.SaveTodo(task);
 			Finish();
 		}
 		
 		void CancelDelete()
 		{
-			if (task.ID != 0) {
-				TaskManager.DeleteTask(task.ID);
-			}
+			TodoManager.DeleteTodo(task.ID);
 			Finish();
 		}
 	}

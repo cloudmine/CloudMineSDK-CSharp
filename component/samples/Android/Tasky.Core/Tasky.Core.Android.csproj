@@ -48,9 +48,9 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="TodoService.cs" />
     <Compile Include="TodoServiceADO.cs" />
     <Compile Include="Todo.cs" />
+    <Compile Include="TodoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\CloudMineSDK\CloudMineSDK.csproj">
