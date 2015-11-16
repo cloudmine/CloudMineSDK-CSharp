@@ -2,18 +2,18 @@
 
 Deleting files is done the same way as deleting an object given the key of the file to remove. 
 
-### Deleting an object
+## Deleting a file
 
-Calling the `DeleteObject` method takes the ID of the object to be deleted as the only parameter.
+Calling the `DeleteObject` method takes the ID of the file to be deleted as the only parameter.
 
 ```csharp
 Task<CMObjectResponse> delResponse =
 	cmAppObjectService.DeleteObject ("fe232f...");
 ```
 
-### Deleting multiple objects
+## Deleting multiple files
 
-Deleting multiple objects is done in the same way except the `DeleteObjects` method is leveraged with a list of ID to be deleted.
+Deleting multiple files is done in the same way except the `DeleteObjects` method is used with a list of ID to be deleted.
 
 ```csharp
 Task<CMObjectResponse> delResponse =

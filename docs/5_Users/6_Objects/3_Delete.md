@@ -1,19 +1,21 @@
 # Delete User Objects
 
-### Deleting a CMObject
+`CMUserService` offers a few ways to remove objects by ID. `DeleteUserObject`, `DeleteUserObjects` and `DeleteAllUserObjects` are the methods used to remove objects from CloudMine.
 
-Objects can be deleted with `DeleteUserObject` method on the user service which requires the object ID and  the user object of the owning and logged in user.
+## Deleting an object
+
+Calling the `DeleteUserObject` method takes the ID of the object to be deleted and the logged in `CMUser` object representing the user that owns the object.
 
 ```csharp
 Task<CMObjectResponse> delResponse = 
-	appObjSrvc.DeleteObject ("h8h2hf...", user);
+	userObjSrvc.DeleteObject ("h8h2hf...", user);
 ```
 
-### Deleting multiple objects
+## Deleting multiple objects
 
-Objects can also be deleted by passing their objectIds into the `DeleteUserObjects` method in the `CMUserService`. 
+Deleting multiple objects is done in the same way except the `DeleteUserObjects` method is leveraged with a list of ID to be deleted.
 
 ```csharp
 Task<CMObjectResponse> delResponse = 
-	appObjSrvc.DeleteObject (new string[] {"h8h2hf...", "koi2f5..."}, user);
+	userObjSrvc.DeleteObjects (new string[] {"h8h2hf...", "koi2f5..."}, user);
 ```

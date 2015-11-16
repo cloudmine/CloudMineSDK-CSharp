@@ -26,4 +26,4 @@ using (FileStream fileStream = File.OpenRead("image.png"))
 }
 ```
 
-{{warning "If the file ID given already exists on the server, the existing file will be overwritten."}}
+{{warning "If the file ID given already exists on the server, the existing file will be overwritten. **File IDs must be unique across your entire application and all of your users.**"}}
