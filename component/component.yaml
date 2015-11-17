@@ -1,23 +1,22 @@
 %YAML 1.2
 ---
-name: CloudMine SDK
-id: cloudmine-sdk
-publisher: CloudMine Inc.
+name: CloudMine .NET SDK
+id: cloudmine-csharp-sdk
+publisher: CloudMine, Inc.
 license: License.md
 icons: 
   - cloudmine-sdk_128x128.png
   - cloudmine-sdk_512x512.png
 publisher-url: https://www.cloudmine.me/
 libraries: 
-  ios: ../lib/ios/Awesome.dll
-summary: CloudMine empowers organizations to deliver engaging mobile apps while eliminating architectural complexities. CloudMine brings together the core components for building enterprise mobile apps on the industry’s most secure backend platform. The CloudMine mBaaS Platform takes apps from test to web­scale deployment instantly. 
+  ios: lib/ios/Awesome.dll
+summary: CloudMine empowers organizations to deliver engaging mobile apps while eliminating architectural complexities. CloudMine brings together the core components for building enterprise mobile apps on the industry’s most secure backend platform. The CloudMine Platform takes apps from test to web­scale deployment instantly. 
 details: Details.md
 screenshots: 
   - screenshots/screenshot1.png
 getting-started: GettingStarted.md
-version: 1.0.0
+version: 0.9.0
 samples: 
-  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
-  Android Sample: ../samples/AwesomeSample/AwesomeSample.sln
-  Windows Phone Sample: ../samples/AwesomeSample/AwesomeSample.sln
+  iOS Sample: ../samples/iOS/TaskyiOS_Starter.sln
+  Android Sample: ../samples/Android/TaskyAndroid_Starter.sln
 ...

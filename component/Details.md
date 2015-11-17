@@ -5,5 +5,5 @@ mBaaS Platform takes apps from test to web­scale deployment, instantly.
 
 ### Mission
 
-Our mission is to remove the complexity out of app development, allowing focus on the thing
+Our mission is to remove the complexity out of secure app development, allowing focus on the thing
 that matters most: unique value & function.
