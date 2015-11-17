@@ -6,7 +6,7 @@
 
 1. Rick click on packages in the project folder feom within the solution explorer
 2. Click 'Add Packages'
-3. Search for CloudMine in the search helper and click 'Add Package'
+3. Search for CloudMine in the search helper and click 'Add Package'. Also add the Json.Net package for defining your serializable classes.
 
 CloudMine's .NET SDK begins with configuring your application object which holds the application ID and the API key needed by the subsequent services to make REST calls to the CloudMine platform. 
 
@@ -49,6 +49,12 @@ Intellisense and MonoDoc are enabled for documentation of individual service met
 
 ### Source Code
 * [Github](https://github.com/cloudmine/cloudmine-xamarin)
+
+### Sample Apps
+
+If you are familiar with the Xamarin Tasky tutorial apps then check out the CloudMine SDK sample apps in the repository. We have replaced the local database layer with a service that directly works with the CloudMine SDK as a reference for working with CloudMine.
+
+* [Github](https://github.com/cloudmine/cloudmine-xamarin/component/samples)
 
 ### Documentation
 

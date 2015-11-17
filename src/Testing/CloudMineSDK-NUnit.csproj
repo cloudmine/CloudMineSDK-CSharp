@@ -56,6 +56,8 @@
     <Compile Include="CMUserObjSetTests.cs" />
     <Compile Include="CMUserObjUpdateTests.cs" />
     <Compile Include="CMUserObjDeleteTests.cs" />
+    <Compile Include="CMUserObjSearchTests.cs" />
+    <Compile Include="CMAccessListServiceTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

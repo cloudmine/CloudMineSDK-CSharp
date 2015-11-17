@@ -27,7 +27,7 @@ namespace CloudMineSDK.Model
 		[JsonProperty("members")]
 		public string[] Members { get; set; }
 		[JsonProperty("permissions")]
-		public CMAccessListPermissions[] Permissions { get; set; }
+		public CMAccessListPermission[] Permissions { get; set; }
 		[JsonProperty("segments")]
 		public CMAccessListSegments Segments { get; set; }
 
@@ -35,7 +35,7 @@ namespace CloudMineSDK.Model
 		{
 			ID = new Guid().ToString().Replace("-", string.Empty);
 			Members = new string[] { };
-			Permissions = new CMAccessListPermissions[] { CMAccessListPermissions.r };
+			Permissions = new CMAccessListPermission[] { CMAccessListPermission.r };
 		}
 	}
 
@@ -76,7 +76,7 @@ namespace CloudMineSDK.Model
 	/// u - Update
 	/// d - Delete
 	/// </summary>
-	public enum CMAccessListPermissions
+	public enum CMAccessListPermission
 	{
 		c, r, u, d
 	}

@@ -402,7 +402,7 @@ namespace CloudMineSDK.Services
 		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
 		/// <param name="user"></param>
 		/// <param name="opts"></param>
-		public Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts) where T : CMObject
+		public Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts = null) where T : CMObject
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -459,7 +459,7 @@ namespace CloudMineSDK.Services
 
 		#endregion File
 
-		public Task<CMResponse> ListUsers(CMRequestOptions opts)
+		public Task<CMResponse> ListUsers(CMRequestOptions opts = null)
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -475,7 +475,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">User.</param>
 		/// <param name="query">Query.</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
-		public Task<CMResponse> SearchUsers(CMUser user, string query, CMRequestOptions opts)
+		public Task<CMResponse> SearchUsers(CMUser user, string query, CMRequestOptions opts = null)
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -494,7 +494,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">Instance of CMUser with a valid session token</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
 		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
-		public Task<CMUserResponse<T>> CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMUserResponse<T>> CurrentUserProfile<T>(CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -516,7 +516,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">User containg the profile to be replaced with valid session token.</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
 		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
-		public Task<CMResponse> UpdateUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMResponse> UpdateUserProfile<T>(CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
@@ -538,7 +538,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">User containg the profile to be replaced with valid session token.</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
 		/// <typeparam name="T">CMUserprofile type derivative</typeparam>
-		public Task<CMResponse> MergeUserProfile<T>(CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile
+		public Task<CMResponse> MergeUserProfile<T>(CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile
 		{
 			if (opts == null)
 				opts = new CMRequestOptions();
