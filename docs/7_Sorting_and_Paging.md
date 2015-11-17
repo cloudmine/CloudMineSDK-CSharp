@@ -24,4 +24,4 @@ var opts = new CMRequestOptions () {
 	LimitResults = 20
 };
 ```
-Note: running count on every query in a large dataset could greatly impact the runtime of the query. It is advised to limit the use of count to the first or at timed intervals.
+{{note 'Running `count` on every query in a large dataset could greatly impact the runtime of the query. It is advised to limit the use of `count` to the first or at timed intervals.'}}

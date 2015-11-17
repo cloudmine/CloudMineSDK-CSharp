@@ -65,7 +65,6 @@ Beyond the links provided below, check out the Gihub repository for the SDK and 
 * [CloudMine Dashboard](https://cloudmine.me/dashboard)
 
 ### Contact
-* Sales: sales@cloudmine.me
-* Engineering support: support@cloudmine.me
-* Tel: 1-855-662-7722 ext 2
-* Twitter: @CloudMine @ry_donahue
+* Sales: [sales@cloudmine.me](mailto:sales@cloudmine.me)
+* Engineering support: [support@cloudmine.me](support@cloudmine.me)
+* Twitter: [@CloudMine](http://twitter.com/@CloudMine)
