@@ -5,7 +5,8 @@ Once you've granted access to an object with a `CMAccessList`, other authorized 
 If you are requesting the shared object with its ID explicitly, the object will be automatically fetched.
 
 ```csharp
-
+Task<CMObjectFetchResponse<PIIMock>> getResponse = 
+	userService.GetUserObject<PIIMock> (user, SHARED_OBJECT_ID);
 ```
 
 However, if you want to load it through a search, it will not be returned UNLESS you use the proper query string parameters in `CMRequestOptions` when creating your request.
