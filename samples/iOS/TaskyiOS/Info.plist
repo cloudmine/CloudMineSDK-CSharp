@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Tasky</string>
+	<string>CloudMine Tasky</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Resources/icon-57.png</string>
@@ -26,6 +26,10 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>7.0</string>
+	<string>8.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
+	<key>CFBundleIdentifier</key>
+	<string>me.cloudmine.samples.tasky</string>
 </dict>
 </plist>

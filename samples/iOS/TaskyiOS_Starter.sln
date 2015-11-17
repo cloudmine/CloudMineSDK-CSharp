@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskyiOS", "TaskyiOS\Taskyi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasky.Core.iOS", "Tasky.Core\Tasky.Core.iOS.csproj", "{3A95B215-DC1A-4A51-A2FD-AB811103F1CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMineSDK", "..\..\..\src\CloudMineSDK\CloudMineSDK.csproj", "{DD88400C-6134-4892-A767-0923FCDB0B33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMineSDK", "..\..\src\CloudMineSDK\CloudMineSDK.csproj", "{DD88400C-6134-4892-A767-0923FCDB0B33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
