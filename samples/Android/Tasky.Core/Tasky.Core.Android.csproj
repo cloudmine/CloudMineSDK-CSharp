@@ -45,7 +45,6 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
     <Compile Include="TodoServiceADO.cs" />
@@ -53,12 +52,13 @@
     <Compile Include="TodoManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\CloudMineSDK\CloudMineSDK.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\CloudMineSDK\CloudMineSDK.csproj">
       <Project>{DD88400C-6134-4892-A767-0923FCDB0B33}</Project>
       <Name>CloudMineSDK</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>
