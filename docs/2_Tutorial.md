@@ -1,6 +1,4 @@
-## Starting a New Project
-
-### Xamarin or Visual Studio
+# Tutorial Xamarin
 
 (This assumes you already have cloned the SDK from the CloudMine repository.)
 
@@ -10,13 +8,13 @@
 
 CloudMine's .NET SDK begins with configuring your application object which holds the application ID and the API key needed by the subsequent services to make REST calls to the CloudMine platform. 
 
-4. Configure application ID and API key variables
+4. Configure your application ID and API key variables. When going to production you will most likely want to obfuscate these by storing in an encrypted client database or at the very least not making them static for lifecycle of the application. Not doing so makes an application vulnerable to advanced memory forensics to obtain credentials. Regardless it is never recommended to store a master key on the application. It it recommended that you further limit the data API keys have access to through custom filters in the CloudMine dashboard.
 
 ```csharp
 // Find this in your developer console
-private const string appID = "de45fca...";
+private string appID = "de45fca...";
 // Find this in your developer console
-private const string apiKey = "856d34a...";
+private string apiKey = "856d34a...";
 ```
 
 5. Instantiate a CMApplication object where needed
@@ -42,29 +40,6 @@ IPushNotificationService pushService = new CMPushNotificationService (app, api);
 IAccessListService aclService = new CMAccessListService (app, api);
 ```
 
-Intellisense and MonoDoc are enabled for documentation of individual service methods as well as examples linked further in this documentation.
+Check out some of the sample applications which leverage some of the CloudMine SDK services.
 
-
-## Additional Resources
-
-### Source Code
-* [Github](https://github.com/cloudmine/cloudmine-csharp)
-
-### Sample Apps
-
-If you are familiar with the Xamarin Tasky tutorial apps then check out the CloudMine SDK sample apps in the repository. We have replaced the local database layer with a service that directly works with the CloudMine SDK as a reference for working with CloudMine.
-
-* [Github](https://github.com/cloudmine/cloudmine-csharp/tree/master/samples)
-
-### Documentation
-
-Beyond the links provided below, check out the Gihub repository for the SDK and looks at the NUnit integration tests. They provide many examples of how to leverage SDK and CloudMine features.
-
-* [Tutorials](https://cloudmine.me/docs/#/code_examples)
-* [Full API documentation](https://cloudmine.me/docs)
-* [CloudMine Dashboard](https://cloudmine.me/dashboard)
-
-### Contact
-* Sales: [sales@cloudmine.me](mailto:sales@cloudmine.me)
-* Engineering support: [support@cloudmine.me](support@cloudmine.me)
-* Twitter: [@CloudMine](http://twitter.com/@CloudMine)
+[Github](https://github.com/cloudmine/cloudmine-csharp/tree/master/samples)
