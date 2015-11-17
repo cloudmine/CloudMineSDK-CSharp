@@ -45,7 +45,7 @@ namespace NetSDKTests
 		}
 
 		[Test()]
-		public void CanPublishDeviceToken ()
+		public void CanPublishDeviceToken_iOS ()
 		{
 			string token = "740f4707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bb78ad";
 
@@ -60,6 +60,27 @@ namespace NetSDKTests
 
 			// register a token with the server
 			Task<CMResponse> pushRegisterResponse = pushService.RegisterIOSDevicePushNotifications (user, token);
+			pushRegisterResponse.Wait ();
+
+			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
+		}
+
+		[Test()]
+		public void CanPublishDeviceToken_Android ()
+		{
+			string token = "740f4707bebcf74f9b7c25d48e3358945f6aa01da5ddb387462c7eaf61bb78ad";
+
+			Task<CMUserResponse<CMUserProfileMock>> loginResponse = userService.Login<CMUserProfileMock> (user);
+			loginResponse.Wait ();
+
+			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
+			Assert.That (loginResponse.Result.HasErrors, Is.False);
+			Assert.AreEqual (loginResponse.Result.CMUser.Profile.GetType (), typeof(CMUserProfileMock)); 
+			Assert.AreEqual (loginResponse.Result.CMUser.Profile.FavoriteCafe, "CloudMine Coffee to Go");
+			Assert.AreEqual (loginResponse.Result.CMUser.Session, user.Session); // ensure session set
+
+			// register a token with the server
+			Task<CMResponse> pushRegisterResponse = pushService.RegisterAndroidDevicePushNotifications (user, token);
 			pushRegisterResponse.Wait ();
 
 			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
