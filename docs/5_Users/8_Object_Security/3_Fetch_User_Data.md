@@ -1,6 +1,6 @@
 # Fetching Shared User Data
 
-Once you've granted access to an object with a `CMAccessList`, other users with permission can fetch the shared object.
+Once you've granted access to an object with a `CMAccessList`, other authorized users with can fetch, modify, or delete the shared object depending the permissions you've set in the ACL.
 
 If you are requesting the shared object with its ID explicitly, the object will be automatically fetched.
 
