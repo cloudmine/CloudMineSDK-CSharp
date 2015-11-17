@@ -16,7 +16,7 @@ namespace CloudMineSDK.Services
 		private CMApplication Application { get; set; }
 		private IRestWrapper APIService { get; set; }
 
-		public CMPushNotificationService(IRestWrapper apiService, CMApplication application)
+		public CMPushNotificationService(CMApplication application, IRestWrapper apiService)
 		{
 			Application = application;
 			APIService = apiService;

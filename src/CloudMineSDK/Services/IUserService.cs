@@ -28,7 +28,7 @@ namespace CloudMineSDK.Services
 		Task<CMResponse> ResetPassword(string token, string newPassword);
 		Task<CMResponse> ResetPasswordRequest(string email);
 
-		Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts) where T : CMObject;
+		Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts = null) where T : CMObject;
 
 		Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject;
 
@@ -38,10 +38,10 @@ namespace CloudMineSDK.Services
 		Task<CMFileResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
 		Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts);
 
-		Task<CMResponse> ListUsers (CMRequestOptions opts);
-		Task<CMResponse> SearchUsers (CMUser user, string query, CMRequestOptions opts);
-		Task<CMUserResponse<T>> CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
-		Task<CMResponse> UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
-		Task<CMResponse> MergeUserProfile<T> (CMUser<T> user, CMRequestOptions opts) where T : CMUserProfile;
+		Task<CMResponse> ListUsers (CMRequestOptions opts = null);
+		Task<CMResponse> SearchUsers (CMUser user, string query, CMRequestOptions opts = null);
+		Task<CMUserResponse<T>> CurrentUserProfile<T> (CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile;
+		Task<CMResponse> UpdateUserProfile<T> (CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile;
+		Task<CMResponse> MergeUserProfile<T> (CMUser<T> user, CMRequestOptions opts = null) where T : CMUserProfile;
 	}
 }

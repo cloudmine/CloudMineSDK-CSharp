@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMineSDK-iOSTests", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMineSDK-NUnit", "Testing\CloudMineSDK-NUnit.csproj", "{0164CDB2-212B-4DDB-90E3-09AA2CFD06F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMineSDK-iOSTutorial", "CloudMineSDK-iOSTutorial\CloudMineSDK-iOSTutorial.csproj", "{403A2A2B-9C04-430C-AE0E-D05633584813}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,18 +29,6 @@ Global
 		{0164CDB2-212B-4DDB-90E3-09AA2CFD06F2}.Release|iPhone.Build.0 = Release|Any CPU
 		{0164CDB2-212B-4DDB-90E3-09AA2CFD06F2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{0164CDB2-212B-4DDB-90E3-09AA2CFD06F2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|iPhone.Build.0 = Debug|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|Any CPU.ActiveCfg = Release|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|Any CPU.Build.0 = Release|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|iPhone.ActiveCfg = Release|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|iPhone.Build.0 = Release|iPhone
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{403A2A2B-9C04-430C-AE0E-D05633584813}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{AAD2B031-2FE5-437B-ADED-19EACB3ABE25}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{AAD2B031-2FE5-437B-ADED-19EACB3ABE25}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{AAD2B031-2FE5-437B-ADED-19EACB3ABE25}.Debug|iPhone.ActiveCfg = Debug|iPhone
