@@ -18,7 +18,7 @@ The Library is open-source and under the MIT license.
 
 We're actively developing and invite you to fork and send pull requests on GitHub.
 
-* [cloudmine/cloudmine-xamarin](https://github.com/cloudmine/cloudmine-xamarin)
+* [cloudmine/cloudmine-csharp](https://github.com/cloudmine/cloudmine-csharp)
 
 ###Xamarin/Nuget
 
