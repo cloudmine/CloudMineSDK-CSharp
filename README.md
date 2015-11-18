@@ -1,4 +1,4 @@
-# cloudmine-xamarin
+# cloudmine-csharp
 
 We have C# Library available for you to download to make native development on .Net/Mono/Xamarin environments even easier. Developing with the C# SDK is designed to be a plug and play Portable Class Library (PCL 4.5) meaning .NET Framework 4.5 or later.
 
