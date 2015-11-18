@@ -2,6 +2,39 @@
 
 ## iOS
 
+CloudMine supports recieving push notification from the Apple Push Notification Service. Before sending push notifications, you'll need to register your app with Google, as described [here](#/push_notifications#app-registration). To do so you will need to register the device for push and in `AppDelegate` override `RegisteredForRemoteNotifications`. 
+
+```csharp
+public override void RegisteredForRemoteNotifications (
+UIApplication application, NSData deviceToken)
+{
+    // Get current device token
+    var DeviceToken = deviceToken.Description;
+    if (!string.IsNullOrWhiteSpace(DeviceToken)) {
+        DeviceToken = DeviceToken.Trim('<').Trim('>');
+    }
+
+    // Get previous device token
+    var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
+
+    // Has the token changed?
+    if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
+    {
+        //TODO: Unregister the old with CloudMine
+    }
+
+    // Save new device token to CloudMine
+    IPushNotificationService pushService = 
+		new CMPushNotificationService (app, api);
+	Task<CMResponse> pushRegisterResponse = 
+		pushService.RegisterAndroidDevicePushNotifications (user, DeviceToken);
+		
+    NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
+}
+```
+
+Given the device token a register call to CloudMine is possible. It is also wise to check that the token equals the old token and if not unregister the old token with CloudMine. While not necessary it definitely makes maintenance and push tracking easier.
+
 ## Android
 CloudMine supports receiving push notifications from the Google Cloud Messaging service (GCM). Before sending push notifications, you'll need to register your app with Google, as described [here](#/push_notifications#app-registration). Once your app is configured, you'll need to add code to your app that registers the device with Google. Xamarin Android goes over this [here](https://developer.xamarin.com/guides/cross-platform/application_fundamentals/notifications/android/remote_notifications_in_android/). 
 
