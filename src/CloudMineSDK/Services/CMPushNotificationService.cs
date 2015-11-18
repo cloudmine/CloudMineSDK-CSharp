@@ -88,14 +88,23 @@ namespace CloudMineSDK.Services
 			return APIService.Request(Application, string.Format("push/channel/{0}/unsubscribe", channelName), HttpMethod.Post, CMSerializer.ToStream(dataDict), opts);
 		}
 
+		/// <summary>
+		/// Registers the android device push notifications.
+		/// </summary>
+		/// <returns>The android device push notifications.</returns>
+		/// <param name="user">User.</param>
+		/// <param name="deviceToken">Device token from Google GCM registration.</param>
 		public Task<CMResponse> RegisterAndroidDevicePushNotifications(CMUser user, object deviceToken)
 		{
-			throw new NotImplementedException();
+			Dictionary<string, object> dataDict = new Dictionary<string, object>();
+			dataDict.Add("token", deviceToken);
+
+			return APIService.Request(Application, "device/", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(user));
 		}
 
 		public Task<CMResponse> UnRegisterAndroidDevicePushNotifications(CMUser user)
 		{
-			throw new NotImplementedException();
+			return APIService.Request(Application, "device/", HttpMethod.Delete, null, new CMRequestOptions(user));
 		}
 
 		public Task<CMResponse> RegisterWPDevicePushNotifications(CMUser user, object deviceToken)

@@ -56,6 +56,8 @@ If you are familiar with the Xamarin Tasky tutorial apps then check out the Clou
 
 * [Github](https://github.com/cloudmine/cloudmine-csharp/tree/master/samples)
 
+When working with the sample apps checkout the `TodoService` in the Tasky.Core project within the solution. There you will find the proper place to put application ID and API key values.
+
 ### Documentation
 
 Beyond the links provided below, check out the Gihub repository for the SDK and looks at the NUnit integration tests. They provide many examples of how to leverage SDK and CloudMine features.

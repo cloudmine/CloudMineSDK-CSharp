@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="TodoServiceADO.cs" />
     <Compile Include="Todo.cs" />
     <Compile Include="TodoManager.cs" />
+    <Compile Include="TodoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

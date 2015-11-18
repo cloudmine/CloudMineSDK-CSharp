@@ -1,36 +1,60 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
+
+using Mono.Data.Sqlite;
+using System.IO;
+using System.Data;
+using CloudmineSDK.Model;
+using CloudMineSDK.Services;
 using System.Threading.Tasks;
 using CloudMineSDK.Model.Responses;
 
-namespace Tasky.Core {
+namespace Tasky.Core
+{
 	/// <summary>
-	/// Manager classes are an abstraction on the data access layers
+	///
 	/// </summary>
-	public static class TaskManager {
+	public class TodoService 
+	{
+				private static CMApplication app { get; set; }
+		private static IRestWrapper restWrapper { get; set; }
+		private static IAppObjectService appObjectService { get; set; }
 
-		static TaskManager ()
+		protected static TodoService self;	
+
+		static TodoService ()
 		{
+			self = new TodoService();
 		}
-		
-		public static Task<CMObjectFetchResponse<Todo>> GetTodo(string id)
-		{
-			return TodoService.GetTodo(id);
+
+		protected TodoService () {
+			string appID = "";
+			string apiKey = "";
+
+			app = new CMApplication (appID, apiKey);
+			restWrapper = new PCLRestWrapper ();
+			appObjectService = new CMAppObjectService(app, restWrapper);
 		}
-		
+
 		public static Task<CMObjectSearchResponse<Todo>> GetTodos ()
 		{
-			return TodoService.GetTodos();
+			return  appObjectService.SearchObjects<Todo> (@"[__class__=""Todo""]");
 		}
-		
-		public static Task<CMObjectResponse> SaveTodo (Todo item)
+
+		public static Task<CMObjectFetchResponse<Todo>> GetTodo (string id) 
 		{
-			return TodoService.SaveTodo(item);
+			return appObjectService.GetObject<Todo> (id);
 		}
-		
-		public static Task<CMObjectResponse> DeleteTodo(string id)
+
+		public static Task<CMObjectResponse> SaveTodo (Todo item) 
 		{
-			return TodoService.DeleteTodo(id);
+			return appObjectService.SetObject<Todo> (item);
+		}
+
+		public static Task<CMObjectResponse> DeleteTodo(string id) 
+		{
+			return appObjectService.DeleteObject (id);
 		}
 	}
 }

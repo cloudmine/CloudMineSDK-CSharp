@@ -17,9 +17,6 @@ namespace Tasky.Core
 	/// </summary>
 	public class TodoService 
 	{
-		const string AppID = "de45fca60db7402ab15159655581e96c";
-		const string APIKey = "856d34ac32344a0780a022a5bd3c22d6";
-
 		private static CMApplication app { get; set; }
 		private static IRestWrapper restWrapper { get; set; }
 		private static IAppObjectService appObjectService { get; set; }
@@ -32,7 +29,10 @@ namespace Tasky.Core
 		}
 
 		protected TodoService () {
-			app = new CMApplication (AppID, APIKey);
+			string appID = "";
+			string apiKey = "";
+
+			app = new CMApplication (appID, apiKey);
 			restWrapper = new PCLRestWrapper ();
 			appObjectService = new CMAppObjectService(app, restWrapper);
 		}

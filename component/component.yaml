@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-name: CloudMine .NET SDK
+name: CloudMineSDK
 id: cloudmine-csharp-sdk
 publisher: CloudMine, Inc.
 license: License.md
@@ -17,14 +17,14 @@ details: Details.md
 screenshots: 
 getting-started: GettingStarted.md
 version: 0.9.0
+packages:
+  "": Newtonsoft.Json, Version=7.0.0
 samples: 
-  iOS Sample: ../samples/iOS/TaskyiOS_Starter.sln
-  Android Sample: ../samples/Android/TaskyAndroid_Starter.sln
   - name: "iOS Tasky Sample"
-    path: ../samples/iOS/TaskyiOS_Starter.sln
+    path: ../samples/iOS/TaskyiOS-Starter.sln
     configuration: "Debug|iPhone"
     nobuild: true
   - name: "Android Tasky Sample"
-    path: ../samples/Android/TaskyAndroid_Starter.sln
+    path: ../samples/Android/TaskyAndroid-Starter.sln
     configuration: "Debug|Xamarin_Android_API_15"
     nobuild: true

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Todo.cs" />
-    <Compile Include="TodoServiceADO.cs" />
+    <Compile Include="TodoManager.cs" />
     <Compile Include="TodoService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
