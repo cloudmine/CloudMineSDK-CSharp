@@ -32,6 +32,7 @@ namespace NetSDKTests
 			CMApplication app = new CMApplication (appID, apiKey);
 			IRestWrapper api = new PCLRestWrapper ();
 			pushService = new CMPushNotificationService (app, api);
+			userService = new CMUserService (app, api);
 		}
 
 		[Test()]
@@ -53,16 +54,12 @@ namespace NetSDKTests
 			loginResponse.Wait ();
 
 			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
-			Assert.That (loginResponse.Result.HasErrors, Is.False);
-			Assert.AreEqual (loginResponse.Result.CMUser.Profile.GetType (), typeof(CMUserProfileMock)); 
-			Assert.AreEqual (loginResponse.Result.CMUser.Profile.FavoriteCafe, "CloudMine Coffee to Go");
-			Assert.AreEqual (loginResponse.Result.CMUser.Session, user.Session); // ensure session set
 
 			// register a token with the server
-			Task<CMResponse> pushRegisterResponse = pushService.RegisterIOSDevicePushNotifications (user, token);
+			Task<CMResponse> pushRegisterResponse = pushService.RegisterIOSDevicePushNotifications (user, "SOMERANDOMIDENTIFIER", token);
 			pushRegisterResponse.Wait ();
 
-			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
+			Assert.AreEqual (pushRegisterResponse.Result.Status, HttpStatusCode.OK);
 		}
 
 		[Test()]
@@ -74,16 +71,12 @@ namespace NetSDKTests
 			loginResponse.Wait ();
 
 			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
-			Assert.That (loginResponse.Result.HasErrors, Is.False);
-			Assert.AreEqual (loginResponse.Result.CMUser.Profile.GetType (), typeof(CMUserProfileMock)); 
-			Assert.AreEqual (loginResponse.Result.CMUser.Profile.FavoriteCafe, "CloudMine Coffee to Go");
-			Assert.AreEqual (loginResponse.Result.CMUser.Session, user.Session); // ensure session set
 
 			// register a token with the server
-			Task<CMResponse> pushRegisterResponse = pushService.RegisterAndroidDevicePushNotifications (user, token);
+			Task<CMResponse> pushRegisterResponse = pushService.RegisterAndroidDevicePushNotifications (user, "SOMERANDOMIDENTIFIER", token);
 			pushRegisterResponse.Wait ();
 
-			Assert.AreEqual (loginResponse.Result.Status, HttpStatusCode.OK);
+			Assert.AreEqual (pushRegisterResponse.Result.Status, HttpStatusCode.OK);
 		}
 	}
 }

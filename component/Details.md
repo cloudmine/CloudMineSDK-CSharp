@@ -1,4 +1,4 @@
-### Build mobile apps faster. 
+### Build secure mobile apps faster. 
 
 CloudMine empowers organizations to deliver engaging mobile apps while eliminating architectural complexities. CloudMine brings together the core components for building enterprise mobile apps on the industry’s most secure backend platform. The CloudMine
 mBaaS Platform takes apps from test to web­scale deployment, instantly.

@@ -93,27 +93,74 @@ namespace CloudMineSDK.Services
 		/// </summary>
 		/// <returns>The android device push notifications.</returns>
 		/// <param name="user">User.</param>
-		/// <param name="deviceToken">Device token from Google GCM registration.</param>
-		public Task<CMResponse> RegisterAndroidDevicePushNotifications(CMUser user, object deviceToken)
+		/// <param name="uniqueDeviceId">Android.OS.Build.Serial</param>
+		/// <param name="gcmToken">Device token from Google GCM registration.</param>
+		public Task<CMResponse> RegisterAndroidDevicePushNotifications(CMUser user, string uniqueDeviceId, object gcmToken)
 		{
+			CMRequestOptions options = new CMRequestOptions(null, user);
+
+			options.Headers.Add ("device_type", "android");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
-			dataDict.Add("token", deviceToken);
+			dataDict.Add("token", gcmToken);
+			dataDict.Add("device_type", "android");
+			dataDict.Add("device_id", uniqueDeviceId);
 
-			return APIService.Request(Application, "device/", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(user));
+			return APIService.Request(Application, "device", HttpMethod.Post, CMSerializer.ToStream(dataDict), options);
 		}
 
-		public Task<CMResponse> UnRegisterAndroidDevicePushNotifications(CMUser user)
+		/// <summary>
+		/// unregister android device push notifications.
+		/// </summary>
+		/// <returns>The register android device push notifications.</returns>
+		/// <param name="user">User with valid session.</param>
+		/// <param name="uniqueDeviceId">Android.OS.Build.Serial</param>
+		public Task<CMResponse> UnRegisterAndroidDevicePushNotifications(CMUser user, string uniqueDeviceId)
 		{
-			return APIService.Request(Application, "device/", HttpMethod.Delete, null, new CMRequestOptions(user));
+			CMRequestOptions options = new CMRequestOptions(null, user);
+
+			options.Headers.Add ("device_type", "android");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
+			return APIService.Request(Application, "device", HttpMethod.Delete, null, options);
 		}
 
-		public Task<CMResponse> RegisterWPDevicePushNotifications(CMUser user, object deviceToken)
+		/// <summary>
+		/// Registers the WP device push notifications.
+		/// </summary>
+		/// <returns>The WP device push notifications.</returns>
+		/// <param name="user">User with valid session.</param>
+		/// <param name="uniqueDeviceId">Windows.Phone.System.Analytics.HostInformation.PublisherHostId</param>
+		/// <param name="wpToken">Device token.</param>
+		public Task<CMResponse> RegisterWPDevicePushNotifications(CMUser user, string uniqueDeviceId, object wpToken)
 		{
+			CMRequestOptions options = new CMRequestOptions(null, user);
+
+			options.Headers.Add ("device_type", "wp");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
+			Dictionary<string, object> dataDict = new Dictionary<string, object>();
+			dataDict.Add("token", wpToken);
+			dataDict.Add("device_type", "wp");
+			dataDict.Add("device_id", uniqueDeviceId);
+
 			throw new NotImplementedException();
 		}
-		
-		public Task<CMResponse> UnRegisterWPDevicePushNotifications(CMUser user)
+
+		/// <summary>
+		/// Unregister WP device push notifications.
+		/// </summary>
+		/// <returns>The register WP device push notifications.</returns>
+		/// <param name="user">User with valid session.</param>
+		/// <param name="uniqueDeviceId">Windows.Phone.System.Analytics.HostInformation.PublisherHostId</param>
+		public Task<CMResponse> UnRegisterWPDevicePushNotifications(CMUser user, string uniqueDeviceId)
 		{
+			CMRequestOptions options = new CMRequestOptions(null, user);
+
+			options.Headers.Add ("device_type", "wp");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
 			throw new NotImplementedException();
 		}
 
@@ -123,27 +170,39 @@ namespace CloudMineSDK.Services
 		/// identification string contained in the callback and an actively logged in 
 		/// CMUser to register with CloudMine.
 		/// </summary>
-		/// <param name="user">Valid logged in CMUser</param>
-		/// <param name="deviceToken">The token objcet returned in didRegisterForRemoteNotificationsWithDeviceToken</param>
-		/// <param name="registerResponseAction">Callback Action for handling the response</param>
-		public Task<CMResponse> RegisterIOSDevicePushNotifications(CMUser user, object deviceToken)
+		/// <param name="user">User with valid session</param>
+		/// /// <param name="uniqueDeviceId">UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString()</param>
+		/// <param name="apnsToken">The token object returned in didRegisterForRemoteNotificationsWithDeviceToken</param>
+		public Task<CMResponse> RegisterIOSDevicePushNotifications(CMUser user, string uniqueDeviceId, object apnsToken)
 		{
-			string deviceTokenString = StripIOSDeviceToken(deviceToken.ToString());
+			CMRequestOptions options = new CMRequestOptions(null, user);
 
-			Dictionary<string, object> dataDict = new Dictionary<string, object>();
+			options.Headers.Add ("device_type", "ios");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
+			string deviceTokenString = StripIOSDeviceToken(apnsToken.ToString());
+
+			Dictionary<string, string> dataDict = new Dictionary<string, string>();
 			dataDict.Add("token", deviceTokenString);
+			dataDict.Add("device_type", "ios");
+			dataDict.Add("device_id", uniqueDeviceId);
 
-			return APIService.Request(Application, "device/", HttpMethod.Post, CMSerializer.ToStream(dataDict), new CMRequestOptions(user));
+			return APIService.Request(Application, "device", HttpMethod.Post, CMSerializer.ToStream(dataDict), options);
 		}
 
 		/// <summary>
 		/// Allows for unregistering a valid logged in CMUser from push notifications.
 		/// </summary>
 		/// <param name="user">Valid logged in CMUser</param>
-		/// <param name="unRegisterResponseAction">Callback Action for handling the response</param>
-		public Task<CMResponse> UnRegisterIOSDevicePushNotifications(CMUser user)
+		/// <param name="uniqueDeviceId">UIKit.UIDevice.CurrentDevice.IdentifierForVendor.AsString()</param>
+		public Task<CMResponse> UnRegisterIOSDevicePushNotifications(CMUser user, string uniqueDeviceId)
 		{
-			return APIService.Request(Application, "device/", HttpMethod.Delete, null, new CMRequestOptions(user));
+			CMRequestOptions options = new CMRequestOptions(null, user);
+
+			options.Headers.Add ("device_type", "ios");
+			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+
+			return APIService.Request(Application, "device", HttpMethod.Delete, null, options);
 		}
 
 		/// <summary>

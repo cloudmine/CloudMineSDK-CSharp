@@ -19,12 +19,12 @@ namespace CloudMineSDK.Services
 		Task<CMResponse> SubscribeToChannel(string channelName, CMUser userToAdd);
 		Task<CMResponse> UnsubscribeToChannel(string channelName, CMUser userToRemove);
 
-		Task<CMResponse> RegisterAndroidDevicePushNotifications(CMUser user, object deviceToken);
-		Task<CMResponse> UnRegisterAndroidDevicePushNotifications(CMUser user);
-		Task<CMResponse> RegisterWPDevicePushNotifications(CMUser user, object deviceToken);
-		Task<CMResponse> UnRegisterWPDevicePushNotifications(CMUser user);
-		Task<CMResponse> RegisterIOSDevicePushNotifications(CMUser user, object deviceToken);
-		Task<CMResponse> UnRegisterIOSDevicePushNotifications(CMUser user);
+		Task<CMResponse> RegisterAndroidDevicePushNotifications(CMUser user, string uniqueDeviceId, object gcmToken);
+		Task<CMResponse> UnRegisterAndroidDevicePushNotifications(CMUser user, string uniqueDeviceId);
+		Task<CMResponse> RegisterWPDevicePushNotifications(CMUser user, string uniqueDeviceId, object wpToken);
+		Task<CMResponse> UnRegisterWPDevicePushNotifications(CMUser user, string uniqueDeviceId);
+		Task<CMResponse> RegisterIOSDevicePushNotifications(CMUser user, string uniqueDeviceId, object apnsToken);
+		Task<CMResponse> UnRegisterIOSDevicePushNotifications(CMUser user, string uniqueDeviceId);
 		string StripIOSDeviceToken(string deviceID);
 	}	
 }

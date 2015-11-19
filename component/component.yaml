@@ -1,8 +1,8 @@
 %YAML 1.2
 ---
-name: CloudMineSDK
+name: CloudMine Connected Health SDK
 id: cloudmine-csharp-sdk
-publisher: CloudMine, Inc.
+publisher: CloudMine
 license: License.md
 icons: 
   - cloudmine-sdk_128x128.png
