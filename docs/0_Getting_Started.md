@@ -18,7 +18,7 @@ This SDK, like all official CloudMine SDKs, is open source and under the MIT lic
 
 We're actively developing and invite you to fork and send pull requests on GitHub.
 
-* [cloudmine/cloudmine-xamarin](https://github.com/cloudmine/cloudmine-xamarin)
+* [cloudmine/cloudmine-csharp](https://github.com/cloudmine/cloudmine-csharp)
 
 It is highly advised that you check out the repository and explore some of the projects under the main solution. Integration tests have been written on supported platforms and give great insight into how the SDK was intended to be leveraged.
 

@@ -32,7 +32,7 @@ Task<CMObjectResponse> objResponse = appObjSrvc.Run (
 
 ## Code Snippet Options
 
-`CMServerFunction` has several options to control code snippet execution.
+`CMRequestOptions` has several options to control code snippet execution.
 
 ### CMRequest options
 
