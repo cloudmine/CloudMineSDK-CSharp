@@ -12,7 +12,7 @@ libraries:
   ios: ../src/CloudMineSDK/bin/release/CloudMineSDK.dll
   ios-unified: ../src/CloudMineSDK/bin/release/CloudMineSDK.dll
   android: ../src/CloudMineSDK/bin/release/CloudMineSDK.dll
-summary: CloudMine empowers organizations to deliver engaging mobile apps while eliminating architectural complexities. CloudMine brings together the core components for building enterprise mobile apps on the industry’s most secure backend platform. The CloudMine Platform takes apps from test to web­scale deployment instantly. 
+summary: CloudMine is a HIPAA compliant backend platform for powering your connected health apps.
 details: Details.md
 screenshots: 
 getting-started: GettingStarted.md

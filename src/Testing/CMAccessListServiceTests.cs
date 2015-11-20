@@ -59,8 +59,6 @@ namespace CloudMineSDKNUnit
 			Task<CMResponse> createAccessListTask = accessService.CreateAccessList (user, acl);
 			createAccessListTask.Wait ();
 
-			createAccessListTask.Wait ();
-
 			Assert.AreEqual (createAccessListTask.Result.Status, HttpStatusCode.OK);
 
 
@@ -69,8 +67,6 @@ namespace CloudMineSDKNUnit
 			};
 
 			Task<CMResponse> modifyAccessListTask = accessService.ModifyAccessList (user, acl);
-			modifyAccessListTask.Wait ();
-
 			modifyAccessListTask.Wait ();
 
 			Assert.AreEqual (modifyAccessListTask.Result.Status, HttpStatusCode.OK);

@@ -52,7 +52,7 @@ namespace CloudMineSDKNUnit
 				SocialSecurityNumber = "333-22-4444"
 			};
 
-			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (pii, user);
+			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (user, pii);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);
@@ -60,7 +60,7 @@ namespace CloudMineSDKNUnit
 			Assert.That (objResponse.Result.Success.ContainsKey(pii.ID), Is.True);
 
 			pii.FirstName = "John";
-			Task<CMObjectResponse> updateResponse = userService.UpdateUserObject<PIIMock> (pii, user);
+			Task<CMObjectResponse> updateResponse = userService.UpdateUserObject<PIIMock> (user, pii);
 			updateResponse.Wait ();
 
 			Assert.AreEqual (updateResponse.Result.Status, HttpStatusCode.OK);
@@ -86,7 +86,7 @@ namespace CloudMineSDKNUnit
 				SocialSecurityNumber = "333-22-4444"
 			};
 
-			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (pii, user);
+			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (user, pii);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);
@@ -94,7 +94,7 @@ namespace CloudMineSDKNUnit
 			Assert.That (objResponse.Result.Success.ContainsKey(pii.ID), Is.True);
 
 			pii.FirstName = "John";
-			Task<CMObjectResponse> getResponse = userService.UpdateUserObject (pii.ID, pii, user);
+			Task<CMObjectResponse> getResponse = userService.UpdateUserObject (user, pii.ID, pii);
 			getResponse.Wait ();
 
 			Assert.AreEqual (getResponse.Result.Status, HttpStatusCode.OK);

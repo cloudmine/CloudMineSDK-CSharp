@@ -52,14 +52,14 @@ namespace CloudMineSDKNUnit
 				SocialSecurityNumber = "333-22-4444"
 			};
 
-			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (pii, user);
+			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (user, pii);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);
 			Assert.That (objResponse.Result.HasErrors, Is.False);
 			Assert.That (objResponse.Result.Success.ContainsKey(pii.ID), Is.True);
 
-			Task<CMObjectResponse> deleteResponse = userService.DeleteUserObject(pii.ID, user);
+			Task<CMObjectResponse> deleteResponse = userService.DeleteUserObject(user, pii.ID);
 			deleteResponse.Wait ();
 
 			Assert.AreEqual (deleteResponse.Result.Status, HttpStatusCode.OK);

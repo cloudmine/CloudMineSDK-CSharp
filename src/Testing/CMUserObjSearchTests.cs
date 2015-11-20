@@ -51,7 +51,7 @@ namespace CloudMineSDKNUnit
 				SocialSecurityNumber = "333-22-4444"
 			};
 
-			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (pii, user);
+			Task<CMObjectResponse> objResponse = userService.SetUserObject<PIIMock> (user, pii);
 			objResponse.Wait ();
 
 			Assert.AreEqual (objResponse.Result.Status, HttpStatusCode.OK);

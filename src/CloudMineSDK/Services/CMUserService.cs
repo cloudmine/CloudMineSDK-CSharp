@@ -267,7 +267,7 @@ namespace CloudMineSDK.Services
 		/// <param name="data">CMObject to be created at the server</param>
 		/// <param name="user">the user for which this object will be created</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
-		public Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject
+		public Task<CMObjectResponse> SetUserObject<T>(CMUser user, T data, CMRequestOptions opts = null) where T : CMObject
 		{
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			// only set the type if not already set and T is not CMobject
@@ -296,7 +296,7 @@ namespace CloudMineSDK.Services
 		/// <param name="value">CMObject to be uploaded</param>
 		/// <param name="user">User which contains session where the data will reside.</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params..</param>
-		public Task<CMObjectResponse> UpdateUserObject(string key, object value, CMUser user, CMRequestOptions opts = null)
+		public Task<CMObjectResponse> UpdateUserObject(CMUser user, string key, object value, CMRequestOptions opts = null)
 		{
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			dataDict[key] = value;
@@ -316,7 +316,7 @@ namespace CloudMineSDK.Services
 		/// <param name="user">User which contains session where the data will reside.</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		/// <typeparam name="T">Objects must derive from the CMObject class which ensures proper configuration.</typeparam>
-		public Task<CMObjectResponse> UpdateUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject
+		public Task<CMObjectResponse> UpdateUserObject<T>(CMUser user, T data, CMRequestOptions opts = null) where T : CMObject
 		{
 			Dictionary<string, T> dataDict = new Dictionary<string, T>();
 			dataDict[data.ID] = data;
@@ -338,7 +338,7 @@ namespace CloudMineSDK.Services
 		/// <param name="key">Key for the user object to be deleted. Also known as ID, __id__</param>
 		/// <param name="user">User.</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
-		public Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null)
+		public Task<CMObjectResponse> DeleteUserObject(CMUser user, string key,CMRequestOptions opts = null)
 		{
 			if (key != null)
 			{
@@ -360,7 +360,7 @@ namespace CloudMineSDK.Services
 		/// <param name="keys">Keys for the user objects to be deleted. Also known as ID, __id__</param>
 		/// <param name="user">User.</param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
-		public Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null)
+		public Task<CMObjectResponse> DeleteUserObjects(CMUser user, string[] keys, CMRequestOptions opts = null)
 		{
 			if (keys != null && keys.Length > 0)
 			{
@@ -422,7 +422,7 @@ namespace CloudMineSDK.Services
 		/// <param name="data">Stream of the binary to be uploaded.</param>
 		/// <param name="user">User file uploads requires a user with a valid sessions token.</param>
 		/// <param name="opts">Any custom options for the request such as snippet execution on upload completion.</param>
-		public Task<CMFileResponse> Upload(string key, Stream data, CMUser user, CMRequestOptions opts)
+		public Task<CMFileResponse> Upload(CMUser user, string key, Stream data, CMRequestOptions opts)
 		{
 			if (opts == null) {
 				opts = new CMRequestOptions ();
@@ -440,7 +440,7 @@ namespace CloudMineSDK.Services
 		}
 
 		// Download file ========
-		public Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts)
+		public Task<CMFileResponse> Download(CMUser user, string key, CMRequestOptions opts)
 		{
 			if (opts == null) {
 				opts = new CMRequestOptions ();

@@ -13,8 +13,8 @@ namespace CloudMineSDK.Services
 		Task<CMUserResponse> Create(CMUser user, CMRequestOptions opts = null);
 
 		Task<CMObjectResponse> DeleteAllUserObjects(CMUser user, CMRequestOptions opts = null);
-		Task<CMObjectResponse> DeleteUserObject(string key, CMUser user, CMRequestOptions opts = null);
-		Task<CMObjectResponse> DeleteUserObjects(string[] keys, CMUser user, CMRequestOptions opts = null);
+		Task<CMObjectResponse> DeleteUserObject(CMUser user, string key, CMRequestOptions opts = null);
+		Task<CMObjectResponse> DeleteUserObjects(CMUser user, string[] keys, CMRequestOptions opts = null);
 
 		Task<CMObjectFetchResponse<T>> GetUserObject<T>(CMUser user, string key, CMRequestOptions opts = null) where T : CMObject;
 		Task<CMObjectFetchResponse<T>> GetUserObjects<T>(CMUser user, List<string> keys, CMRequestOptions opts = null) where T : CMObject;
@@ -30,13 +30,13 @@ namespace CloudMineSDK.Services
 
 		Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts = null) where T : CMObject;
 
-		Task<CMObjectResponse> SetUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject;
+		Task<CMObjectResponse> SetUserObject<T>(CMUser user, T data, CMRequestOptions opts = null) where T : CMObject;
 
-		Task<CMObjectResponse> UpdateUserObject(string key, object value, CMUser user, CMRequestOptions opts = null);
-		Task<CMObjectResponse> UpdateUserObject<T>(T data, CMUser user, CMRequestOptions opts = null) where T : CMObject;
+		Task<CMObjectResponse> UpdateUserObject(CMUser user, string key, object value, CMRequestOptions opts = null);
+		Task<CMObjectResponse> UpdateUserObject<T>(CMUser user, T data, CMRequestOptions opts = null) where T : CMObject;
 
-		Task<CMFileResponse> Upload(string key, System.IO.Stream data, CMUser user, CMRequestOptions opts);
-		Task<CMFileResponse> Download(string key, CMUser user, CMRequestOptions opts);
+		Task<CMFileResponse> Upload(CMUser user, string key, System.IO.Stream data, CMRequestOptions opts);
+		Task<CMFileResponse> Download(CMUser user, string key, CMRequestOptions opts);
 
 		Task<CMResponse> ListUsers (CMRequestOptions opts = null);
 		Task<CMResponse> SearchUsers (CMUser user, string query, CMRequestOptions opts = null);
