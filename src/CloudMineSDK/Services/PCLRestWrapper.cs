@@ -57,8 +57,13 @@ namespace CloudMineSDK.Services
 					}
 				}
 
+				// push needs a platform but in the default case lets give our metrics something to chew on.
+				if (!httpClient.DefaultRequestHeaders.Contains ("device_type"))
+					httpClient.DefaultRequestHeaders.Add ("device_type", "csharp");
+
 				httpClient.DefaultRequestHeaders.Add("X-CloudMine-ApiKey", app.APIKey);
-				//httpClient.DefaultRequestHeaders.Add("Content-Type", opts.ContentType);
+				httpClient.DefaultRequestHeaders.Add ("sdk_type", "csharp");
+				httpClient.DefaultRequestHeaders.Add ("X-Unique-Id", Guid.NewGuid().ToString());
 				httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(opts.ContentType));
 
 				foreach (string headerKey in opts.Headers.Keys)
