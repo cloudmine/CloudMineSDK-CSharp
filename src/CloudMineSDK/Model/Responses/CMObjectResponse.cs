@@ -47,7 +47,7 @@ namespace CloudMineSDK.Model.Responses
         void ExtractKeyAndErrors()
         {
             Errors = ExtractErrors();
-            Success = ExtractKey<Dictionary<string, string>>("success");
+			Success = ExtractKey<Dictionary<string, string>>("success") ?? new Dictionary<string, string>();
         }
     }
 }
