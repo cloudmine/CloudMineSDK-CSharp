@@ -101,6 +101,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "android");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "Android");
 
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			dataDict.Add("token", gcmToken);
@@ -122,6 +123,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "android");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "Android");
 
 			return APIService.Request(Application, "device", HttpMethod.Delete, null, options);
 		}
@@ -139,6 +141,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "wp");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "wp");
 
 			Dictionary<string, object> dataDict = new Dictionary<string, object>();
 			dataDict.Add("token", wpToken);
@@ -160,6 +163,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "wp");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "wp");
 
 			throw new NotImplementedException();
 		}
@@ -179,6 +183,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "ios");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "iOS");
 
 			string deviceTokenString = StripIOSDeviceToken(apnsToken.ToString());
 
@@ -201,6 +206,7 @@ namespace CloudMineSDK.Services
 
 			options.Headers.Add ("device_type", "ios");
 			options.Headers.Add ("HTTP_X_CLOUDMINE_UT", uniqueDeviceId);
+			options.Headers.Add ("X-CloudMine-Agent", "iOS");
 
 			return APIService.Request(Application, "device", HttpMethod.Delete, null, options);
 		}
