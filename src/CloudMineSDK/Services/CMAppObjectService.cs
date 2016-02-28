@@ -220,7 +220,7 @@ namespace CloudMineSDK.Services
 		/// This query returns all objects where the key field is equal to the string "value".
 		/// </summary>
 		/// <typeparam name="T">Becomes the __class__ parameter of the query. Uses Type name as the value</typeparam>
-		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
+		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.io/docs/api#query_syntax </param>
 		/// <param name="opts">Optional Request parameters for things like post execution snippet params.</param>
 		public Task<CMObjectSearchResponse<T>> SearchObjects<T>(string query, CMRequestOptions opts = null) where T : CMObject
 		{

@@ -399,7 +399,7 @@ namespace CloudMineSDK.Services
 		/// are of the generic type parameter.
 		/// </summary>
 		/// <typeparam name="T">Becomes the __class__ parameter of the query. Uses Type name as the value</typeparam>
-		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.me/docs/api#query_syntax </param>
+		/// <param name="query">String query for CloudMine search. Please reference dos at: https://cloudmine.io/docs/api#query_syntax </param>
 		/// <param name="user"></param>
 		/// <param name="opts"></param>
 		public Task<CMObjectSearchResponse<T>> SearchUserObjects<T>(CMUser user, string query, CMRequestOptions opts = null) where T : CMObject

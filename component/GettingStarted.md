@@ -62,11 +62,11 @@ When working with the sample apps checkout the `TodoService` in the Tasky.Core p
 
 Beyond the links provided below, check out the Gihub repository for the SDK and looks at the NUnit integration tests. They provide many examples of how to leverage SDK and CloudMine features.
 
-* [Tutorials](https://cloudmine.me/docs/#/code_examples)
-* [Full API documentation](https://cloudmine.me/docs)
-* [CloudMine Dashboard](https://cloudmine.me/dashboard)
+* [Tutorials](https://cloudmine.io/docs/#/code_examples)
+* [Full API documentation](https://cloudmine.io/docs/)
+* [CloudMine Dashboard](https://compass.cloudmine.io/)
 
 ### Contact
 * Sales: [sales@cloudmine.me](mailto:sales@cloudmine.me)
-* Engineering support: [support@cloudmine.me](support@cloudmine.me)
+* Engineering support: [support@cloudmineinc.com](support@cloudmineinc.com)
 * Twitter: [@CloudMine](http://twitter.com/@CloudMine)

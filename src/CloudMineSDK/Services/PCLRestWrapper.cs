@@ -44,7 +44,7 @@ namespace CloudMineSDK.Services
 
 				// Set various query options.
 				List<string> query = GetCloudMineQuery(opts);
-				Uri uri = GetCloudmineUri(options.BaseURL ?? "api.cloudmine.me", app.APIVersion, app.ApplicationID, action, query);
+				Uri uri = GetCloudmineUri(options.BaseURL ?? "api.cloudmine.io", app.APIVersion, app.ApplicationID, action, query);
 				httpClient.BaseAddress = uri;
 
 				if (opts.Credentials != null)
