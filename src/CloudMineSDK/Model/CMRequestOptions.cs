@@ -23,10 +23,9 @@ namespace CloudmineSDK.Model
 
 		/// <summary>
 		/// Denotes the root URL of the CloudMine API endpoints. Examples
-		/// include but not limited to: {"api.cloudmine.me", "secure.cloudmine.me", 
-		/// "testing.cloudmine.me"}
+		/// include but not limited to: {"api.cloudmine.io"}
 		/// </summary>
-		public string BaseURL = "api.cloudmine.me";
+		public string BaseURL = "api.cloudmine.io";
 
         public CMRequestOptions()
         {
